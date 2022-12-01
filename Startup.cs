@@ -47,6 +47,14 @@ namespace IGRSCourtAPI
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "IGRSCourtAPI v1"));
             }
 
+            app.UseCors(options =>
+     options.WithOrigins("http://localhost:4200", "http://localhost", "http://localhost:4200", "/index.html", "/login")
+     .AllowAnyMethod()
+     .AllowAnyHeader()
+     .AllowCredentials()
+     .SetIsOriginAllowed((host) => true)
+     );
+
             app.UseHttpsRedirection();
 
             app.UseRouting();

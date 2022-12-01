@@ -18,9 +18,9 @@ namespace IGRSCourtAPI.Database.DB_Entity
         public int districtid { get; set; }// , districtid int
         public DateTime createddate { get; set; } //, createddate timestamp
         public bool flag { get; set; }//, flag boolean
-        public Zone_master Zone_Masters { get; set; }
-        public virtual District_master District_masters { get; set; }
+        //public Zone_master Zone_Masters { get; set; }
+        //public virtual District_master District_masters { get; set; }
 
-        public virtual ICollection<Courtcase> Courtcases { get; set; }
+        //public virtual ICollection<Courtcase> Courtcases { get; set; }
     }
 }

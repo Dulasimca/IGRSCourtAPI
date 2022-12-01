@@ -17,10 +17,10 @@ namespace IGRSCourtAPI.Database.DB_Entity
         public DateTime? createddate { get; set; }//, createddate timestamp
         public bool flag { get; set; }// flag boolean
 
-        public virtual ICollection<District_master> District_masters { get; set; }
+        //public virtual ICollection<District_master> District_masters { get; set; }
 
-        public virtual ICollection<Sro_master> Sro_masters { get; set; }
+        //public virtual ICollection<Sro_master> Sro_masters { get; set; }
 
-        public virtual ICollection<Courtcase> Courtcases { get; set; }
+        //public virtual ICollection<Courtcase> Courtcases { get; set; }
     }
 }

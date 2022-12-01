@@ -17,8 +17,8 @@ namespace IGRSCourtAPI.Database.DB_Entity
         public int zoneid { get; set; }//, zoneid int
         public DateTime createddate { get; set; }//, createddate timestamp
         public bool flag { get; set; } // , flag boolean
-        public virtual Zone_master Zone_Masters { get; set; }
-        public virtual ICollection<Sro_master> Sro_masters { get; set; }
-        public virtual ICollection<Courtcase> Courtcases { get; set; }
+        //public virtual Zone_master Zone_Masters { get; set; }
+        //public virtual ICollection<Sro_master> Sro_masters { get; set; }
+        //public virtual ICollection<Courtcase> Courtcases { get; set; }
     }
 }

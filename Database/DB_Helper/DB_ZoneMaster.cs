@@ -69,7 +69,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
                     {
                         _zoneMaster.zonename = zone_Master.zonename;
                         _zoneMaster.flag = zone_Master.flag;
-                        _zoneMaster.createddate = zone_Master.createddate;
+                        //_zoneMaster.createddate = zone_Master.createddate;
                     }
                 }
                 else
