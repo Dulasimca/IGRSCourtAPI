@@ -10,6 +10,7 @@ using IGRSCourtAPI.Model;
 
 namespace IGRSCourtAPI.Controllers
 {
+    [ApiController]
     public class ZoneMasterController : Controller
     {
         private readonly DB_ZoneMaster _db;

@@ -31,14 +31,14 @@ namespace IGRSCourtAPI.Database.DB_Entity
         public DateTime? createdate { get; set; } //createdate     timestamp
         public bool flag { get; set; } // ,flag boolean
 
-        public virtual Zone_master Zone_Masters { get; set; }
-        public virtual District_master District_masters { get; set; }
-        public virtual Sro_master Sro_masters { get; set; }
-        public virtual Court_master Court_masters { get; set; }
-        public virtual Casetype_master Casetype_masters { get; set; }
+        //public virtual Zone_master Zone_Masters { get; set; }
+        //public virtual District_master District_masters { get; set; }
+        //public virtual Sro_master Sro_masters { get; set; }
+        //public virtual Court_master Court_masters { get; set; }
+        //public virtual Casetype_master Casetype_masters { get; set; }
 
-        public virtual Responsetype_master Responsetype_masters { get; set; }
-        public virtual Casestatus_master Casestatus_masters { get; set; }
+        //public virtual Responsetype_master Responsetype_masters { get; set; }
+        //public virtual Casestatus_master Casestatus_masters { get; set; }
 
     }
 }

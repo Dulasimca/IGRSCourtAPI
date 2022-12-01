@@ -13,7 +13,15 @@ namespace IGRSCourtAPI.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.UseSerialColumns();
+
+            // Configure StudentId as FK for StudentAddress
+   
+            //  modelBuilder.Entity<District_master>()
+            // .HasOne(p => p.Zone_Masters)
+            //.WithMany(b => b.District_masters)
+            // .HasForeignKey(p => p.zoneid);
         }
+
         public DbSet<Courtcase> Courtcases { get; set; }
         public DbSet<Zone_master> Zone_Masters { get; set; }
         public DbSet<District_master> District_Masters { get; set; }
