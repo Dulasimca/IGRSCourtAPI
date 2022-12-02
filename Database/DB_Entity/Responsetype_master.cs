@@ -16,11 +16,7 @@ namespace IGRSCourtAPI.Database.DB_Entity
         public string responsetypename { get; set; } //    ,responsetypename varchar(500)
         public DateTime? createddate { get; set; }//, createddate timestamp
         public bool flag { get; set; } //, flag boolean
-<<<<<<< HEAD
-      //  public virtual ICollection<Courtcase> Courtcases { get; set; }
-=======
        // public virtual ICollection<Courtcase> Courtcases { get; set; }
->>>>>>> a86256f8468dc02dd6a1ec44271fd0fb1d6d8be8
 
     }
 }

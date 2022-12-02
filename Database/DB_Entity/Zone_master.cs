@@ -24,11 +24,7 @@ namespace IGRSCourtAPI.Database.DB_Entity
         public DateTime? createddate { get; set; }//, createddate timestamp
         public bool flag { get; set; }// flag boolean
 
-<<<<<<< HEAD
-       // public virtual ICollection<District_master> District_masters { get; set; }
-=======
         //public virtual ICollection<District_master> District_masters { get; set; }
->>>>>>> a86256f8468dc02dd6a1ec44271fd0fb1d6d8be8
 
         //public virtual ICollection<Sro_master> Sro_masters { get; set; }
 
