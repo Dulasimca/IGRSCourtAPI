@@ -30,6 +30,7 @@ namespace IGRSCourtAPI.Database.DB_Entity
         public DateTime casedate { get; set; } //, casedate date
         public DateTime? createdate { get; set; } //createdate     timestamp
         public bool flag { get; set; } // ,flag boolean
+        public int userid { get; set; } // ,flag boolean
 
         //public virtual Zone_master Zone_Masters { get; set; }
         //public virtual District_master District_masters { get; set; }

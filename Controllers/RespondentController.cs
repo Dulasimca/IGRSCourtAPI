@@ -19,12 +19,12 @@ namespace IGRSCourtAPI.Controllers
         }
 
         [HttpGet]
-        [Route("api/[controller]/GetRespondentCase/{id}")]
-        public IActionResult Get(int id)
+        [Route("api/[controller]/GetRespondentCase")]
+        public IActionResult Get(int userid)
         {
             try
             {
-                Courtcase_Model _data = _db.GetCourtcase(id);
+               List<Courtcase_Model> _data = _db.GetCourtcase(userid);
                 if (_data == null)
                 {
                     return Ok(ResponseType.NotFound);
@@ -32,7 +32,7 @@ namespace IGRSCourtAPI.Controllers
                 return Ok(_data);
             }
             catch (Exception ex)
-            {
+            {   
                 AuditLog.WriteError("SaveZoneMaster : " + ex.Message);
                 return BadRequest(ResponseType.Failure);
             }

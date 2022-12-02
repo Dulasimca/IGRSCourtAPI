@@ -24,6 +24,13 @@ namespace IGRSCourtAPI.Model
         public DateTime casedate { get; set; } //, casedate date
         public DateTime? createdate { get; set; } //createdate     timestamp
         public bool flag { get; set; } // ,flag boolean
+        public int userid { get; set; }
+        public string zonename { get; set; }
+        public string districtname { get; set; }
+        public string sroname { get; set; }
+        public string casetypename { get; set; }
+        public string courtname { get; set; }
+        public string casestatusname { get; set; }
 
     }
 }
