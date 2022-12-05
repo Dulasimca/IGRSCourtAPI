@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IGRSCourtAPI.Model;
+using IGRSCourtAPI.Database.DB_Entity;
 
 namespace IGRSCourtAPI.Database.DB_Helper
 {
