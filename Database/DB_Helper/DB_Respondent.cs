@@ -46,31 +46,46 @@ namespace IGRSCourtAPI.Database.DB_Helper
             return _modelList;
         }
 
-        public Courtcase_Model GetCourtcase(int _caseid)
+        public List<Courtcase_Model> GetCourtcase(int _userid)
         {
-            Courtcase_Model _caseModel = new Courtcase_Model();
-            var fromTable = _DataContext.Courtcases.Where(x => x.courtcaseid == _caseid).FirstOrDefault();//from db
-            if(fromTable != null)
-            {
-                _caseModel.courtcaseid = fromTable.courtcaseid;
-                _caseModel.zoneid = fromTable.zoneid;
-                _caseModel.districtid = fromTable.districtid;
-                _caseModel.sroid = fromTable.sroid;
-                _caseModel.remarks = fromTable.remarks;
-                _caseModel.responsetypeid = fromTable.responsetypeid;
-                _caseModel.petitionername = fromTable.petitionername;
-                _caseModel.mainrespondents = fromTable.mainrespondents;
-                _caseModel.casedate = fromTable.casedate;
-                _caseModel.casenumber = fromTable.casenumber;
-                _caseModel.casestatusid = fromTable.casestatusid;
-                _caseModel.casetypeid = fromTable.casetypeid;
-                _caseModel.caseyear = fromTable.caseyear;
-                _caseModel.counterfiled = fromTable.counterfiled;
-                _caseModel.mainprayer = fromTable.mainprayer;
-                _caseModel.createdate = fromTable.createdate;
-                _caseModel.courtid = fromTable.courtid;
-                _caseModel.flag = fromTable.flag;
-            }
+            var _caseModel = (from _dbCaseEntity in  _DataContext.Courtcases 
+                             join Zone in  _DataContext.Zone_Masters on _dbCaseEntity.zoneid equals Zone.zoneid
+                             join District in  _DataContext.District_Masters on _dbCaseEntity.zoneid equals District.districtid
+                             join Sro in  _DataContext.Sro_Masters on _dbCaseEntity.sroid equals Sro.sroid
+                             join CaseType in  _DataContext.Casetype_Masters on _dbCaseEntity.casetypeid equals CaseType.casetypeid
+                             join Court in  _DataContext.Court_Masters on _dbCaseEntity.courtid equals Court.courtid
+                             join CaseStatus in  _DataContext.Casestatus_Masters on _dbCaseEntity.casestatusid equals CaseStatus.casestatusid
+                             where _dbCaseEntity.userid == _userid
+                              select new Courtcase_Model
+                             {
+                                    courtcaseid = _dbCaseEntity.courtcaseid,
+                                    zoneid = _dbCaseEntity.zoneid,
+                                    districtid = _dbCaseEntity.districtid,
+                                    sroid = _dbCaseEntity.sroid,
+                                    remarks = _dbCaseEntity.remarks,
+                                    responsetypeid = _dbCaseEntity.responsetypeid,
+                                    petitionername = _dbCaseEntity.petitionername,
+                                    mainrespondents = _dbCaseEntity.mainrespondents,
+                                    casedate = _dbCaseEntity.casedate,
+                                    casenumber = _dbCaseEntity.casenumber,
+                                    casestatusid = _dbCaseEntity.casestatusid,
+                                    casetypeid = _dbCaseEntity.casetypeid,
+                                    caseyear = _dbCaseEntity.caseyear,
+                                    counterfiled = _dbCaseEntity.counterfiled,
+                                    mainprayer = _dbCaseEntity.mainprayer,
+                                    createdate = _dbCaseEntity.createdate,
+                                    courtid = _dbCaseEntity.courtid,
+                                    flag = _dbCaseEntity.flag,
+                                    userid = _dbCaseEntity.userid,
+                                    zonename = Zone.zonename,
+                                    districtname = District.districtname,
+                                    sroname = Sro.sroname,
+                                    casestatusname = CaseStatus.casestatusname,
+                                    casetypename = CaseType.casetypename,
+                                    courtname = Court.courtname
+                             }).ToList();
+                             //.Where(x => x.courtcaseid == _caseid).FirstOrDefault();//from db
+            
             return _caseModel;
         }
 
@@ -79,21 +94,21 @@ namespace IGRSCourtAPI.Database.DB_Helper
             bool result = false;
             try
             {
-                Courtcase _caseEntity = new Courtcase();
+                Courtcase _dbCaseEntity = new Courtcase();
 
                 if(_caseModel.courtcaseid > 0)
                 {
                     //PUT
-                    _caseEntity = _DataContext.Courtcases.Where(x => x.courtcaseid == _caseModel.courtcaseid).FirstOrDefault();
-                    if(_caseEntity != null)
+                    _dbCaseEntity = _DataContext.Courtcases.Where(x => x.courtcaseid == _caseModel.courtcaseid).FirstOrDefault();
+                    if(_dbCaseEntity != null)
                     {
-                        _caseEntity = ManageCourtcase(_caseModel);
+                        _dbCaseEntity = ManageCourtcase(_caseModel);
                     }
                 } else
                 {
                     //POST
-                    _caseEntity = ManageCourtcase(_caseModel);
-                    _DataContext.Courtcases.Add(_caseEntity);
+                    _dbCaseEntity = ManageCourtcase(_caseModel);
+                    _DataContext.Courtcases.Add(_dbCaseEntity);
                 }
                 _DataContext.SaveChanges();
                 result = true;
@@ -106,25 +121,26 @@ namespace IGRSCourtAPI.Database.DB_Helper
         }
         private Courtcase ManageCourtcase(Courtcase_Model _caseModel)
         {
-            Courtcase courtcase = new Courtcase();
-            courtcase.zoneid = _caseModel.zoneid;
-            courtcase.districtid = _caseModel.districtid;
-            courtcase.sroid = _caseModel.sroid;
-            courtcase.petitionername = _caseModel.petitionername;
-            courtcase.remarks = _caseModel.remarks;
-            courtcase.responsetypeid = _caseModel.responsetypeid;
-            courtcase.mainprayer = _caseModel.mainprayer;
-            courtcase.mainrespondents = _caseModel.mainrespondents;
-            courtcase.courtid = _caseModel.courtid;
-            courtcase.casedate = _caseModel.casedate;
-            courtcase.casenumber = _caseModel.casenumber;
-            courtcase.casestatusid = _caseModel.casestatusid;
-            courtcase.casetypeid = _caseModel.casetypeid;
-            courtcase.caseyear = _caseModel.caseyear;
-            courtcase.counterfiled = _caseModel.counterfiled;
-            courtcase.flag = _caseModel.flag;
-            courtcase.createdate = _caseModel.createdate;
-            return courtcase;
+            Courtcase dbEntity = new Courtcase();
+            dbEntity.zoneid = _caseModel.zoneid;
+            dbEntity.districtid = _caseModel.districtid;
+            dbEntity.sroid = _caseModel.sroid;
+            dbEntity.petitionername = _caseModel.petitionername;
+            dbEntity.remarks = _caseModel.remarks;
+            dbEntity.responsetypeid = _caseModel.responsetypeid;
+            dbEntity.mainprayer = _caseModel.mainprayer;
+            dbEntity.mainrespondents = _caseModel.mainrespondents;
+            dbEntity.courtid = _caseModel.courtid;
+            dbEntity.casedate = _caseModel.casedate;
+            dbEntity.casenumber = _caseModel.casenumber;
+            dbEntity.casestatusid = _caseModel.casestatusid;
+            dbEntity.casetypeid = _caseModel.casetypeid;
+            dbEntity.caseyear = _caseModel.caseyear;
+            dbEntity.counterfiled = _caseModel.counterfiled;
+            dbEntity.flag = _caseModel.flag;
+            dbEntity.createdate = _caseModel.createdate;
+            dbEntity.userid = _caseModel.userid;
+            return dbEntity;
 
         }
     }
