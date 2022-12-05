@@ -27,7 +27,6 @@ namespace IGRSCourtAPI.Database.DB_Helper
             List<Casestatus_master_Model> casestatus_master_Models = new List<Casestatus_master_Model>();
             List<Court_master_Model> court_Master_Models = new List<Court_master_Model>();
             List<Casetype_master_Model> casetype_Master_Models = new List<Casetype_master_Model>();
-            List<Responsetype_master_Model> responsetype_Master_Models = new List<Responsetype_master_Model>();
             try
             {
 
@@ -37,7 +36,6 @@ namespace IGRSCourtAPI.Database.DB_Helper
                 var CourtList = _DataContext.Court_Masters.ToList();
                 var CasetypeList = _DataContext.Casetype_Masters.ToList();
                 var CasestatusList = _DataContext.Casestatus_Masters.ToList();
-                var ResponseList = _DataContext.Responsetype_Masters.ToList();
 
                 ZoneList.ForEach(row => zone_Master_Model.Add(new Zone_master_Model()
                 {
@@ -84,12 +82,6 @@ namespace IGRSCourtAPI.Database.DB_Helper
                     flag = row.flag
                 }));
 
-                ResponseList.ForEach(row => responsetype_Master_Models.Add(new Responsetype_master_Model()
-                {
-                    responsetypeid = row.responsetypeid,
-                    responsetypename = row.responsetypename,
-                    flag = row.flag
-                }));
                 Masters_Model masters_Model = new Masters_Model
                 {
                     Zone_Masters = zone_Master_Model,
@@ -98,7 +90,6 @@ namespace IGRSCourtAPI.Database.DB_Helper
                     Casestatus_Masters= casestatus_master_Models,
                     Court_Masters= court_Master_Models,
                     Casetype_Masters= casetype_Master_Models,
-                    Responsetype_Masters= responsetype_Master_Models
                 };
                 return masters_Model;
             }
@@ -108,5 +99,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
             }
             
         }
+
+
     }
 }
