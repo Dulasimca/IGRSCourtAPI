@@ -31,5 +31,7 @@ namespace IGRSCourtAPI.Database
         public DbSet<Responsetype_master> Responsetype_Masters { get; set; }
         public DbSet<Casestatus_master> Casestatus_Masters { get; set; }
 
+        public DbSet<Menumaster> Menumasters { get; set; }
+
     }
 }

@@ -12,7 +12,6 @@ namespace IGRSCourtAPI.Model
         public List<Sro_master_Model> Sro_Masters { get; set; }
         public List<Court_master_Model> Court_Masters { get; set; }
         public List<Casetype_master_Model> Casetype_Masters { get; set; }
-        public List<Responsetype_master_Model> Responsetype_Masters { get; set; }
         public List<Casestatus_master_Model> Casestatus_Masters { get; set; }
     }
 }
