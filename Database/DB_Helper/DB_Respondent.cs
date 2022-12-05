@@ -100,14 +100,16 @@ namespace IGRSCourtAPI.Database.DB_Helper
                 {
                     //PUT
                     _dbCaseEntity = _DataContext.Courtcases.Where(x => x.courtcaseid == _caseModel.courtcaseid).FirstOrDefault();
-                    if(_dbCaseEntity != null)
+                   Console.WriteLine(_dbCaseEntity);
+                    if (_dbCaseEntity != null)
                     {
-                        _dbCaseEntity = ManageCourtcase(_caseModel);
+                        _dbCaseEntity = ManageCourtcase(_caseModel, _dbCaseEntity);
+                     //   _DataContext.Courtcases.Update(_dbCaseEntity);
                     }
                 } else
                 {
                     //POST
-                    _dbCaseEntity = ManageCourtcase(_caseModel);
+                    _dbCaseEntity = ManageCourtcase(_caseModel, _dbCaseEntity);
                     _DataContext.Courtcases.Add(_dbCaseEntity);
                 }
                 _DataContext.SaveChanges();
@@ -119,9 +121,8 @@ namespace IGRSCourtAPI.Database.DB_Helper
 
             return result;
         }
-        private Courtcase ManageCourtcase(Courtcase_Model _caseModel)
+        private Courtcase ManageCourtcase(Courtcase_Model _caseModel, Courtcase dbEntity)
         {
-            Courtcase dbEntity = new Courtcase();
             dbEntity.zoneid = _caseModel.zoneid;
             dbEntity.districtid = _caseModel.districtid;
             dbEntity.sroid = _caseModel.sroid;
