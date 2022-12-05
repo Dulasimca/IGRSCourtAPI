@@ -32,6 +32,7 @@ namespace IGRSCourtAPI.Database
         public DbSet<Casestatus_master> Casestatus_Masters { get; set; }
 
         public DbSet<Menumaster> Menumasters { get; set; }
+        public DbSet<Usermaster> Usermasters { get; set; }
 
     }
 }
