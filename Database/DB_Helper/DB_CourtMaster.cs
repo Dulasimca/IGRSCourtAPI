@@ -23,7 +23,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
         public List<Court_master_Model> GetCourtMaster()
         {
             List<Court_master_Model> response = new List<Court_master_Model>();
-            var dataList = _DataContext.Court_Masters.ToList();
+            var dataList = _DataContext.Court_Masters.OrderBy(e => e.courtname).ToList();
             dataList.ForEach(row => response.Add(new Court_master_Model()
             {
                 courtid = row.courtid,

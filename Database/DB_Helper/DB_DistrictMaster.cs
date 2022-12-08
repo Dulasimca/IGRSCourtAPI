@@ -23,7 +23,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
         public List<District_master_Model> GetDistrictMaster()
         {
             List<District_master_Model> response = new List<District_master_Model>();
-            var dataList = _DataContext.District_Masters.ToList();
+            var dataList = _DataContext.District_Masters.OrderBy(e=> e.districtname).ToList();
             dataList.ForEach(row => response.Add(new District_master_Model()
             {
                 districtid = row.districtid,

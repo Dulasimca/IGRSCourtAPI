@@ -25,7 +25,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
         public List<Casetype_master_Model> GetCasetypeMaster()
         {
             List<Casetype_master_Model> response = new List<Casetype_master_Model>();
-            var dataList = _DataContext.Casetype_Masters.ToList();
+            var dataList = _DataContext.Casetype_Masters.OrderBy(a => a.casetypename).ToList();
             dataList.ForEach(row => response.Add(new Casetype_master_Model()
             {
                 casetypeid = row.casetypeid,

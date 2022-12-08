@@ -23,7 +23,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
         public List<Zone_master_Model> GetZoneMaster()
         {
             List<Zone_master_Model> response = new List<Zone_master_Model>();
-            var dataList = _DataContext.Zone_Masters.ToList();
+            var dataList = _DataContext.Zone_Masters.OrderBy(a=> a.zonename).ToList();
             dataList.ForEach(row => response.Add(new Zone_master_Model()
             {
                 zoneid = row.zoneid,

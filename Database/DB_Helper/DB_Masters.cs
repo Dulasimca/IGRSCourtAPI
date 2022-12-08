@@ -27,6 +27,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
             List<Casestatus_master_Model> casestatus_master_Models = new List<Casestatus_master_Model>();
             List<Court_master_Model> court_Master_Models = new List<Court_master_Model>();
             List<Casetype_master_Model> casetype_Master_Models = new List<Casetype_master_Model>();
+            List<Role_master_model> Role_master_models = new List<Role_master_model>();
             try
             {
 
@@ -36,6 +37,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
                 var CourtList = _DataContext.Court_Masters.ToList();
                 var CasetypeList = _DataContext.Casetype_Masters.ToList();
                 var CasestatusList = _DataContext.Casestatus_Masters.ToList();
+                var RoleMasterList = _DataContext.rolemaster.ToList();
 
                 ZoneList.ForEach(row => zone_Master_Model.Add(new Zone_master_Model()
                 {
@@ -82,6 +84,13 @@ namespace IGRSCourtAPI.Database.DB_Helper
                     flag = row.flag
                 }));
 
+                RoleMasterList.ForEach(row => Role_master_models.Add(new Role_master_model()
+                {
+                    roleid = row.roleid,
+                    rolename = row.rolename,
+                    flag = row.flag
+                })); ;
+
                 Masters_Model masters_Model = new Masters_Model
                 {
                     Zone_Masters = zone_Master_Model,
@@ -90,6 +99,8 @@ namespace IGRSCourtAPI.Database.DB_Helper
                     Casestatus_Masters= casestatus_master_Models,
                     Court_Masters= court_Master_Models,
                     Casetype_Masters= casetype_Master_Models,
+                    rolemaster = Role_master_models
+
                 };
                 return masters_Model;
             }

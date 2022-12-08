@@ -25,7 +25,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
         public List<Sro_master_Model> GetSroMaster()
         {
             List<Sro_master_Model> response = new List<Sro_master_Model>();
-            var dataList = _DataContext.Sro_Masters.ToList();
+            var dataList = _DataContext.Sro_Masters.OrderBy(e=> e.sroname).ToList();
             dataList.ForEach(row => response.Add(new Sro_master_Model()
             {
                 sroid = row.sroid,

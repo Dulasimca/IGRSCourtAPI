@@ -25,7 +25,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
         public List<Casestatus_master_Model> GetCasestatusMaster()
         {
             List<Casestatus_master_Model> response = new List<Casestatus_master_Model>();
-            var dataList = _DataContext.Casestatus_Masters.ToList();
+            var dataList = _DataContext.Casestatus_Masters.OrderBy(a=> a.casestatusname).ToList();
             dataList.ForEach(row => response.Add(new Casestatus_master_Model()
             {
                 casestatusid = row.casestatusid,
