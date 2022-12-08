@@ -14,5 +14,7 @@ namespace IGRSCourtAPI.Model
         public List<Casetype_master_Model> Casetype_Masters { get; set; }
         public List<Casestatus_master_Model> Casestatus_Masters { get; set; }
         public List<Role_master_model> rolemaster { get; set; }
+        public List<Respondant_master_model> respondentsmaster { get; set; }
+
     }
 }

@@ -34,6 +34,7 @@ namespace IGRSCourtAPI.Database
         public DbSet<Menumaster> Menumasters { get; set; }
         public DbSet<Usermaster> Usermasters { get; set; }
         public DbSet<Role_master> rolemaster { get; set; }
+        public DbSet<Respondant_Master> respondentsmaster { get; set; }
 
 
 

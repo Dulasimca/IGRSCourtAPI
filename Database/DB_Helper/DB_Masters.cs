@@ -28,6 +28,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
             List<Court_master_Model> court_Master_Models = new List<Court_master_Model>();
             List<Casetype_master_Model> casetype_Master_Models = new List<Casetype_master_Model>();
             List<Role_master_model> Role_master_models = new List<Role_master_model>();
+            List<Respondant_master_model> respondant_Master_Models = new List<Respondant_master_model>();
             try
             {
 
@@ -38,6 +39,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
                 var CasetypeList = _DataContext.Casetype_Masters.ToList();
                 var CasestatusList = _DataContext.Casestatus_Masters.ToList();
                 var RoleMasterList = _DataContext.rolemaster.ToList();
+                var RespondentMasterList = _DataContext.respondentsmaster.ToList();
 
                 ZoneList.ForEach(row => zone_Master_Model.Add(new Zone_master_Model()
                 {
@@ -89,7 +91,16 @@ namespace IGRSCourtAPI.Database.DB_Helper
                     roleid = row.roleid,
                     rolename = row.rolename,
                     flag = row.flag
-                })); ;
+                }));
+
+                RespondentMasterList.ForEach(row => respondant_Master_Models.Add(new Respondant_master_model()
+                {
+                    respondentsid = row.respondentsid,
+                    respondentsname = row.respondentsname,
+                    createddate = row.createddate,
+                    flag = row.flag
+                }));
+                    
 
                 Masters_Model masters_Model = new Masters_Model
                 {
@@ -99,7 +110,8 @@ namespace IGRSCourtAPI.Database.DB_Helper
                     Casestatus_Masters= casestatus_master_Models,
                     Court_Masters= court_Master_Models,
                     Casetype_Masters= casetype_Master_Models,
-                    rolemaster = Role_master_models
+                    rolemaster = Role_master_models,
+                    respondentsmaster = respondant_Master_Models
 
                 };
                 return masters_Model;

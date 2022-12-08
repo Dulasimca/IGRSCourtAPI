@@ -24,7 +24,7 @@ namespace IGRSCourtAPI.Controllers
         {
             try
             {
-               List<Courtcase_Model> _data = _db.GetCourtcase(userid, respondentType, fromdate, todate);
+                List<Courtcase_Model> _data = _db.GetCourtcase(userid, respondentType, fromdate, todate);
                 if (_data == null)
                 {
                     return Ok(ResponseType.NotFound);
@@ -32,7 +32,7 @@ namespace IGRSCourtAPI.Controllers
                 return Ok(_data);
             }
             catch (Exception ex)
-            {   
+            {
                 AuditLog.WriteError("SaveZoneMaster : " + ex.Message);
                 return BadRequest(ResponseType.Failure);
             }
@@ -47,7 +47,7 @@ namespace IGRSCourtAPI.Controllers
                 bool isSuccess = _db.saveCourtCases(model);
                 return Ok(isSuccess == true ? model : ResponseType.Failure);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 AuditLog.WriteError("SaveZoneMaster : " + ex.Message);
                 return BadRequest(ResponseType.Failure);
