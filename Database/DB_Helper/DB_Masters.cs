@@ -30,6 +30,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
             List<Role_master_model> Role_master_models = new List<Role_master_model>();
             List<Respondant_master_model> respondant_Master_Models = new List<Respondant_master_model>();
             List<Slp_master_model> slp_Master_Models = new List<Slp_master_model>();
+            List<Judgement_master_model> judgement_Master_Models = new List<Judgement_master_model>();
             try
             {
 
@@ -42,6 +43,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
                 var RoleMasterList = _DataContext.rolemaster.ToList();
                 var RespondentMasterList = _DataContext.respondentsmaster.ToList();
                 var SlpMasterList = _DataContext.slpmaster.ToList();
+                var JudgementMasterList = _DataContext.judgementmaster.ToList();
 
                 ZoneList.ForEach(row => zone_Master_Model.Add(new Zone_master_Model()
                 {
@@ -111,6 +113,15 @@ namespace IGRSCourtAPI.Database.DB_Helper
                     flag = row.flag
                 }));
 
+                JudgementMasterList.ForEach(row => judgement_Master_Models.Add(new Judgement_master_model()
+                {
+                    judgementid = row.judgementid,
+                    judgementname = row.judgementname,
+                    createddate = row.createddate,
+                    flag = row.flag
+                }));
+
+
 
 
                 Masters_Model masters_Model = new Masters_Model
@@ -123,7 +134,8 @@ namespace IGRSCourtAPI.Database.DB_Helper
                     Casetype_Masters= casetype_Master_Models,
                     rolemaster = Role_master_models,
                     respondentsmaster = respondant_Master_Models,
-                    slpmaster = slp_Master_Models
+                    slpmaster = slp_Master_Models,
+                    judgementmaster = judgement_Master_Models
 
                 };
                 return masters_Model;

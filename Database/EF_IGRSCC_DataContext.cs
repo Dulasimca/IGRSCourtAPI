@@ -36,6 +36,9 @@ namespace IGRSCourtAPI.Database
         public DbSet<Role_master> rolemaster { get; set; }
         public DbSet<Respondant_Master> respondentsmaster { get; set; }
         public DbSet<Slp_Master> slpmaster { get; set; }
+        public DbSet<Judgement_master> judgementmaster { get; set; }
+
+
 
 
 
