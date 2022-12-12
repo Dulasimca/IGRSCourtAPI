@@ -69,7 +69,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
                     {
                         _Slp_master.slpid = slpmaster.slpid;
                         _Slp_master.name = slpmaster.name;
-                        _Slp_master.createddate = _Slp_master.createddate;
+                        _Slp_master.createddate = slpmaster.createddate;
                         _Slp_master.flag = slpmaster.flag;
                     }
                 }
