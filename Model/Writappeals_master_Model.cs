@@ -16,6 +16,8 @@ namespace IGRSCourtAPI.Model
            public string regularnumber { get; set; }
            public string natureofdisposal { get; set; }
            public string remarks { get; set; }
+           public DateTime? createddate { get; set; }
+           public bool flag { get; set; }
     
     }
 }
