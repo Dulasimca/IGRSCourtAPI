@@ -50,7 +50,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
 
         }
 
-        private List<Menu> GetMenuTree(List<Menu_Model> list, int? parent)
+        private List<Menu> GetMenuTree(List<Menu_Model  > list, int? parent)
         {
             try
             {
