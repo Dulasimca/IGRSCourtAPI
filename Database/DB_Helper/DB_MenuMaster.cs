@@ -19,7 +19,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
         /// 
         /// </summary>
         /// <returns></returns>
-        public List<Menu> GetMenuMaster(int roleid)
+        public List<Menu> GetMenuMasterById(int roleid)
         {
             List<Menu_Model> Menu_Master_Model = new List<Menu_Model>();
             try
@@ -50,6 +50,28 @@ namespace IGRSCourtAPI.Database.DB_Helper
 
         }
 
+        //GetMenuMasterWithoutId
+        public List<Menu_Model> GetMenuMasters()
+        {
+            List<Menu_Model> response = new List<Menu_Model>();
+            var dataList = _DataContext.Menumasters.OrderBy(e => e.name).ToList();
+            dataList.ForEach(row => response.Add(new Menu_Model()
+            {
+                menuid = row.menuid,
+                id = row.id,
+                name = row.name,
+                url = row.url,
+                parentid = row.parentid,
+                icon = row.icon,
+                roleid = row.roleid,
+                isactive = row.isactive,
+                priorities = row.priorities
+            }));
+            return response;
+
+        }
+
+
         private List<Menu> GetMenuTree(List<Menu_Model> list, int? parent)
         {
             try
@@ -69,6 +91,54 @@ namespace IGRSCourtAPI.Database.DB_Helper
             {
                 return null;
             }
+        }
+
+         public bool SaveMenuMaster(Menu_Model menumaster)
+        {
+            bool isSuccess = false;
+            try
+            {
+                Menumaster _menumaster = new Menumaster();
+                // rolemaster  = new Role_master_model();
+                if (menumaster.menuid > 0)
+                {
+                    //PUT
+                    _menumaster = _DataContext.Menumasters.Where(d => d.menuid.Equals(menumaster.menuid)).FirstOrDefault();
+                    if (_menumaster != null)
+                    {
+                        _menumaster.menuid = menumaster.menuid;                   
+                        _menumaster.id = menumaster.id;
+                        _menumaster.name = menumaster.name;
+                        _menumaster.url = menumaster.url;
+                        _menumaster.parentid = menumaster.parentid;
+                        _menumaster.icon = menumaster.icon;
+                        _menumaster.roleid = menumaster.roleid;
+                        _menumaster.isactive = menumaster.isactive;
+                        _menumaster.priorities = menumaster.priorities;
+                    }
+                }
+                else
+                {
+                    //POST
+                    _menumaster.menuid = menumaster.menuid;
+                    _menumaster.id = menumaster.id;
+                    _menumaster.name = menumaster.name;
+                    _menumaster.url = menumaster.url;
+                    _menumaster.parentid = menumaster.parentid;
+                    _menumaster.icon = menumaster.icon;
+                    _menumaster.roleid = menumaster.roleid;
+                    _menumaster.isactive = menumaster.isactive;
+                    _menumaster.priorities = menumaster.priorities;
+                    _DataContext.Menumasters.Add(_menumaster);
+                }
+                _DataContext.SaveChanges();
+                isSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return isSuccess;
         }
     }
 }

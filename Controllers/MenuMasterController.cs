@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using IGRSCourtAPI.Database.DB_Helper;
 using IGRSCourtAPI.Database;
 using IGRSCourtAPI.Common;
@@ -10,24 +9,22 @@ using IGRSCourtAPI.Model;
 
 namespace IGRSCourtAPI.Controllers
 {
-
-    public class SlpMasterController : Controller
+    public class MenuMasterController : Controller
     {
-    
-        private readonly DB_SlpMaster _db;
-        public SlpMasterController(EF_IGRSCC_DataContext eF_DataContext)
+        private readonly DB_MenuMaster _db;
+        public MenuMasterController(EF_IGRSCC_DataContext eF_DataContext)
         {
-            _db = new DB_SlpMaster(eF_DataContext);
+            _db = new DB_MenuMaster(eF_DataContext);
         }
 
         [HttpGet]
-        [Route("api/[controller]/GetSlpMaster")]
+        [Route("api/[controller]/GetMenuMasters")]
         public IActionResult Get()
         {
             ResponseType type = ResponseType.Success;
             try
             {
-                IEnumerable<Slp_master_model> data = _db.GetSlpMaster();
+                IEnumerable<Menu_Model> data = _db.GetMenuMasters();
                 if (!data.Any())
                 {
                     type = ResponseType.NotFound;
@@ -36,27 +33,26 @@ namespace IGRSCourtAPI.Controllers
             }
             catch (Exception ex)
             {
-                AuditLog.WriteError("SaveSlpMaster : " + ex.Message);
+                AuditLog.WriteError("SaveMenuMaster : " + ex.Message);
                 return BadRequest(ResponseType.Failure);// ResponseHandler.GetExceptionResponse(ex));
             }
         }
 
-        // POST api/<SlpMasterController>
+        // POST api/<MenuMasterController>
         [HttpPost]
-        [Route("api/[controller]/SaveSlpMaster")]
-        public IActionResult Post([FromBody] Slp_master_model model)
+        [Route("api/[controller]/SaveMenuMaster")]
+        public IActionResult Post([FromBody] Menu_Model model)
         {
             try
             {
-                bool isSuccess = _db.SaveSlpMaster(model);
+                bool isSuccess = _db.SaveMenuMaster(model);
                 return Ok(isSuccess == true ? model : ResponseType.Failure);
             }
             catch (Exception ex)
             {
-                AuditLog.WriteError("SaveSlpMaster : " + ex.Message);
+                AuditLog.WriteError("SaveMenuMaster : " + ex.Message);
                 return BadRequest(ResponseType.Failure); //ResponseHandler.GetExceptionResponse(ex));
             }
         }
     }
 }
-

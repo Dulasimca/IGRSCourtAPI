@@ -23,7 +23,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
         public List<Usermaster_Model> GetUserMaster()
         {
             List<Usermaster_Model> response = new List<Usermaster_Model>();
-            var dataList = _DataContext.Usermasters.ToList();
+            var dataList = _DataContext.usermaster.ToList();
             dataList.ForEach(row => response.Add(new Usermaster_Model()
             {
                 userid = row.userid,
@@ -48,7 +48,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
         public Usermaster_Model GetUserMaster(int _userid)
         {
             Usermaster_Model response = new Usermaster_Model();
-            var dataList = _DataContext.Usermasters.Where(a => a.userid == _userid).FirstOrDefault();
+            var dataList = _DataContext.usermaster.Where(a => a.userid == _userid).FirstOrDefault();
                 response.userid = dataList.userid;
                 response.username = dataList.username;
                 response.mailid = dataList.mailid;
@@ -68,46 +68,46 @@ namespace IGRSCourtAPI.Database.DB_Helper
         /// </summary>
         /// <param name="userMaster">from model folder</param>
         /// <returns></returns>
-        public bool SaveUserMaster(Usermaster_Model userMaster)
+        public bool SaveUserMaster(Usermaster_Model usermaster)
         {
             bool isSuccess = false;
             try
             {
                 Usermaster _userMaster = new Usermaster(); // from database db entity table
                 // Usermaster  = new Usermaster_Model();
-                if (userMaster.userid > 0)
+                if (usermaster.userid > 0)
                 {
                     //PUT
-                    _userMaster = _DataContext.Usermasters.Where(d => d.userid.Equals(userMaster.userid)).FirstOrDefault();
+                    _userMaster = _DataContext.usermaster.Where(d => d.userid.Equals(usermaster.userid)).FirstOrDefault();
                     if (_userMaster != null)
                     {
-                        _userMaster.username = userMaster.username;
-                        _userMaster.mailid = userMaster.mailid;
-                        _userMaster.password = userMaster.password;
-                        _userMaster.mobile = userMaster.mobile;
-                        _userMaster.zoneid = userMaster.zoneid;
-                        _userMaster.districtid = userMaster.districtid;
-                        _userMaster.sroid = userMaster.sroid;
-                        _userMaster.roleid = userMaster.roleid;
-                        _userMaster.createddate = userMaster.createddate;
-                        _userMaster.flag = userMaster.flag;
+                        _userMaster.username = usermaster.username;
+                        _userMaster.mailid = usermaster.mailid;
+                        _userMaster.password = usermaster.password;
+                        _userMaster.mobile = usermaster.mobile;
+                        _userMaster.zoneid = usermaster.zoneid;
+                        _userMaster.districtid = usermaster.districtid;
+                        _userMaster.sroid = usermaster.sroid;
+                        _userMaster.roleid = usermaster.roleid;
+                        _userMaster.createddate = usermaster.createddate;
+                        _userMaster.flag = usermaster.flag;
                         
                     }
                 }
                 else
                 {
                     //POST
-                        _userMaster.username = userMaster.username;
-                        _userMaster.mailid = userMaster.mailid;
-                        _userMaster.password = userMaster.password;
-                        _userMaster.mobile = userMaster.mobile;
-                        _userMaster.zoneid = userMaster.zoneid;
-                        _userMaster.districtid = userMaster.districtid;
-                        _userMaster.sroid = userMaster.sroid;
-                        _userMaster.roleid = userMaster.roleid;
-                        _userMaster.createddate = userMaster.createddate;
-                        _userMaster.flag = userMaster.flag;
-                        _DataContext.Usermasters.Add(_userMaster);
+                        _userMaster.username = usermaster.username;
+                        _userMaster.mailid = usermaster.mailid;
+                        _userMaster.password = usermaster.password;
+                        _userMaster.mobile = usermaster.mobile;
+                        _userMaster.zoneid = usermaster.zoneid;
+                        _userMaster.districtid = usermaster.districtid;
+                        _userMaster.sroid = usermaster.sroid;
+                        _userMaster.roleid = usermaster.roleid;
+                        _userMaster.createddate = usermaster.createddate;
+                        _userMaster.flag = usermaster.flag;
+                        _DataContext.usermaster.Add(_userMaster);
                 }
                 _DataContext.SaveChanges();
                 isSuccess = true;
