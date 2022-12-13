@@ -17,6 +17,8 @@ namespace IGRSCourtAPI.Model
         public bool isactive { get; set; }
         public int priorities { get; set; }
         public string  rolename { get; set; }
+        public string parentname { get; set; }
+
 
     }
 

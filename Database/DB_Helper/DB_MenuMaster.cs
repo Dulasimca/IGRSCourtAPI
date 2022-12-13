@@ -56,6 +56,24 @@ namespace IGRSCourtAPI.Database.DB_Helper
         {
             try
             {
+
+                //List<Menu> _menu = new List<Menu>();
+                //List<Menu_Model> menudata = list.Where(x => x.parentid == parent).OrderBy(a => a.priorities).ToList();
+                //foreach (Menu_Model x in  menudata)
+                //{
+                //    Menu menu = new Menu();
+                //    menu.ID = x.id;
+                //    menu.label = x.name;
+                //    menu.parentId = x.parentid;
+                //    menu.routerLink = x.url;
+                //    menu.isActive = x.isactive;
+                //    menu.icon = x.icon;
+                //    menu.items = GetMenuTreechild(list, x.id);
+                //    _menu.Add(menu);
+                //}
+
+                //return _menu;
+
                 return list.Where(x => x.parentid == parent).OrderBy(a => a.priorities).Select(x => new Menu
                 {
                     ID = x.id,
@@ -67,12 +85,37 @@ namespace IGRSCourtAPI.Database.DB_Helper
                     items = GetMenuTree(list, x.id)
                 }).ToList();
             }
-            catch (System.Exception)
+            catch (Exception ex)
             {
                 return null;
             }
         }
+        private List<Menu> GetMenuTreechild(List<Menu_Model> list, int? parent)
+        {
+            try
+            {
 
+                List<Menu> _menu = new List<Menu>();
+                List<Menu_Model> menudata = list.Where(x => x.parentid == parent).OrderBy(a => a.priorities).ToList();
+                foreach (Menu_Model x in menudata)
+                {
+                    Menu menu = new Menu();
+                    menu.ID = x.id;
+                    menu.label = x.name;
+                    menu.parentId = x.parentid;
+                    menu.routerLink = x.url;
+                    menu.isActive = x.isactive;
+                    menu.icon = x.icon;
+                    _menu.Add(menu);
+                }
+
+                return _menu;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
         //MenuMasterWithJoin
         public List<Menu_Model> GetMenuMasters()
         {
@@ -90,7 +133,8 @@ namespace IGRSCourtAPI.Database.DB_Helper
                                   roleid = _dbCaseEntity.roleid,
                                   isactive = _dbCaseEntity.isactive,
                                   priorities = _dbCaseEntity.priorities,
-                                  rolename = Role.rolename
+                                  rolename = Role.rolename,
+                                  parentname = _DataContext.Menumasters.Where(a=> a.id == _dbCaseEntity.parentid).FirstOrDefault().name,
                               }).ToList();
             //.Where(x => x.roleid == _menuid).FirstOrDefault();//from db
 
@@ -110,8 +154,8 @@ namespace IGRSCourtAPI.Database.DB_Helper
                     _menumaster = _DataContext.Menumasters.Where(d => d.menuid.Equals(menumaster.menuid)).FirstOrDefault();
                     if (_menumaster != null)
                     {
-                        _menumaster.menuid = menumaster.menuid;                   
-                        _menumaster.id = menumaster.id;
+                        //_menumaster.menuid = menumaster.menuid;                   
+                       // _menumaster.id = menumaster.id;
                         _menumaster.name = menumaster.name;
                         _menumaster.url = menumaster.url;
                         _menumaster.parentid = menumaster.parentid;
@@ -124,8 +168,8 @@ namespace IGRSCourtAPI.Database.DB_Helper
                 else
                 {
                     //POST
-                    _menumaster.menuid = menumaster.menuid;
-                    _menumaster.id = menumaster.id;
+                    // _menumaster.menuid = menumaster.menuid;
+                    _menumaster.id = _DataContext.Menumasters.Max(m => m.id);// menumaster.id;// maxid ??
                     _menumaster.name = menumaster.name;
                     _menumaster.url = menumaster.url;
                     _menumaster.parentid = menumaster.parentid;
