@@ -20,7 +20,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
         /// </summary>
         /// <returns></returns>
 
-        public List<Writappeals_master_Model> GetWritappealsMaster(int zoneid,int districtid, int sroid,int courtcaseid)
+        public List<Writappeals_master_Model> GetWritappealsMaster(int zoneid, int districtid, int sroid, int courtcaseid)
         {
             List<Writappeals_master_Model> response = new List<Writappeals_master_Model>();
             //var dataList = _DataContext.Writappeals_Masters.OrderBy(a => a.writappeals).ToList();
@@ -47,15 +47,15 @@ namespace IGRSCourtAPI.Database.DB_Helper
                               join Court in _DataContext.Court_Masters on _dbCaseEntity.courtid equals Court.courtid
                               join CaseStatus in _DataContext.Casestatus_Masters on _dbCaseEntity.casestatusid equals CaseStatus.casestatusid
                               join Writappeals in _DataContext.Writappeals_Masters on _dbCaseEntity.courtcaseid equals Writappeals.courtcaseid
-                             where _dbCaseEntity.zoneid == zoneid && _dbCaseEntity.districtid == districtid
-                              && _dbCaseEntity.sroid == sroid && _dbCaseEntity.courtcaseid == courtcaseid
+                              where _dbCaseEntity.zoneid == zoneid && _dbCaseEntity.districtid == districtid
+                               && _dbCaseEntity.sroid == sroid && _dbCaseEntity.courtcaseid == courtcaseid
                               select new Writappeals_master_Model
                               {
                                   courtcaseid = _dbCaseEntity.courtcaseid,
                                   zoneid = _dbCaseEntity.zoneid,
                                   districtid = _dbCaseEntity.districtid,
                                   sroid = _dbCaseEntity.sroid,
-                               //   remarks = _dbCaseEntity.remarks,
+                                  //   remarks = _dbCaseEntity.remarks,
                                   responsetypeid = _dbCaseEntity.responsetypeid,
                                   petitionername = _dbCaseEntity.petitionername,
                                   mainrespondents = _dbCaseEntity.mainrespondents,
@@ -76,8 +76,8 @@ namespace IGRSCourtAPI.Database.DB_Helper
                                   casetypename = CaseType.casetypename,
                                   courtname = Court.courtname,
                                   regularnumber = Writappeals.regularnumber,
-                                  natureofdisposal =Writappeals.natureofdisposal,
-                                  writ_remarks= Writappeals.writ_remarks
+                                  natureofdisposal = Writappeals.natureofdisposal,
+                                  writ_remarks = Writappeals.writ_remarks
 
                               }).ToList();
 
@@ -136,5 +136,5 @@ namespace IGRSCourtAPI.Database.DB_Helper
         }
 
     }
-           
+
 }
