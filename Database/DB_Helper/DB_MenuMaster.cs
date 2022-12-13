@@ -19,7 +19,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
         /// 
         /// </summary>
         /// <returns></returns>
-        public List<Menu> GetMenuMasterById(int roleid)
+        public List<Menu> GetMenuMaster(int roleid)
         {
             List<Menu_Model> Menu_Master_Model = new List<Menu_Model>();
             try
@@ -49,27 +49,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
             }
 
         }
-
-        //GetMenuMasterWithoutId
-        public List<Menu_Model> GetMenuMasters()
-        {
-            List<Menu_Model> response = new List<Menu_Model>();
-            var dataList = _DataContext.Menumasters.OrderBy(e => e.name).ToList();
-            dataList.ForEach(row => response.Add(new Menu_Model()
-            {
-                menuid = row.menuid,
-                id = row.id,
-                name = row.name,
-                url = row.url,
-                parentid = row.parentid,
-                icon = row.icon,
-                roleid = row.roleid,
-                isactive = row.isactive,
-                priorities = row.priorities
-            }));
-            return response;
-
-        }
+  
 
 
         private List<Menu> GetMenuTree(List<Menu_Model> list, int? parent)
@@ -93,7 +73,31 @@ namespace IGRSCourtAPI.Database.DB_Helper
             }
         }
 
-         public bool SaveMenuMaster(Menu_Model menumaster)
+        //MenuMasterWithJoin
+        public List<Menu_Model> GetMenuMasters()
+        {
+            var menumaster = (from _dbCaseEntity in _DataContext.Menumasters
+                              join Role in _DataContext.rolemaster on _dbCaseEntity.roleid equals Role.roleid
+                              
+                              select new Menu_Model
+                              {
+                                  menuid = _dbCaseEntity.menuid,
+                                  id = _dbCaseEntity.id,
+                                  name = _dbCaseEntity.name,
+                                  url = _dbCaseEntity.url,
+                                  parentid = _dbCaseEntity.parentid,
+                                  icon = _dbCaseEntity.icon,
+                                  roleid = _dbCaseEntity.roleid,
+                                  isactive = _dbCaseEntity.isactive,
+                                  priorities = _dbCaseEntity.priorities,
+                                  rolename = Role.rolename
+                              }).ToList();
+            //.Where(x => x.roleid == _menuid).FirstOrDefault();//from db
+
+            return menumaster;
+        }
+
+        public bool SaveMenuMaster(Menu_Model menumaster)
         {
             bool isSuccess = false;
             try

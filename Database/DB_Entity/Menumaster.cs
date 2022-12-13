@@ -21,5 +21,6 @@ namespace IGRSCourtAPI.Database.DB_Entity
         public int roleid { get; set; }
         public bool isactive { get; set; }
         public int priorities { get; set; }
+
     }
 }

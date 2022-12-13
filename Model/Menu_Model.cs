@@ -16,6 +16,8 @@ namespace IGRSCourtAPI.Model
         public int roleid { get; set; }
         public bool isactive { get; set; }
         public int priorities { get; set; }
+        public string  rolename { get; set; }
+
     }
 
     public class Menu

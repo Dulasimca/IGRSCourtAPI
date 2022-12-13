@@ -18,23 +18,22 @@ namespace IGRSCourtAPI.Controllers
         }
 
         [HttpGet]
-        [Route("api/[controller]/GetMenuMasters")]
+        [Route("api/[controller]/GetMenuMasterCase")]
         public IActionResult Get()
         {
-            ResponseType type = ResponseType.Success;
             try
             {
-                IEnumerable<Menu_Model> data = _db.GetMenuMasters();
-                if (!data.Any())
+                List<Menu_Model> _data = _db.GetMenuMasters();
+                if (_data == null)
                 {
-                    type = ResponseType.NotFound;
+                    return Ok(ResponseType.NotFound);
                 }
-                return Ok(data);// ResponseHandler.GetAppResponse(type, data));
+                return Ok(_data);
             }
             catch (Exception ex)
             {
                 AuditLog.WriteError("SaveMenuMaster : " + ex.Message);
-                return BadRequest(ResponseType.Failure);// ResponseHandler.GetExceptionResponse(ex));
+                return BadRequest(ResponseType.Failure);
             }
         }
 

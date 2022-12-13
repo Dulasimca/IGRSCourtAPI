@@ -43,13 +43,13 @@ namespace IGRSCourtAPI.Controllers
         }
 
         [HttpGet]
-        [Route("api/[controller]/GetMenuMasterById")]
+        [Route("api/[controller]/GetMenuMasters")]
         public IActionResult Get(int roleid)
         {
             ResponseType type = ResponseType.Success;
             try
             {
-                List<Menu> data = _dbmenu.GetMenuMasterById(roleid);
+                List<Menu> data = _dbmenu.GetMenuMaster(roleid);
                 if (data == null)
                 {
                     type = ResponseType.NotFound;
@@ -58,7 +58,7 @@ namespace IGRSCourtAPI.Controllers
             }
             catch (Exception ex)
             {
-                AuditLog.WriteError("SaveZoneMaster : " + ex.Message);
+                AuditLog.WriteError("SaveMenuMaster : " + ex.Message);
                 return BadRequest(ResponseType.Failure);// ResponseHandler.GetExceptionResponse(ex));
             }
         }       
