@@ -27,7 +27,7 @@ namespace IGRSCourtAPI.Database.DB_Entity
         public int courtcaseid { get; set; }
         public string regularnumber { get; set; }
         public string natureofdisposal { get; set; }
-        public string remarks { get; set; }
+        public string writ_remarks { get; set; }
         public DateTime? createddate { get; set; }
         public bool flag { get; set; }
 
