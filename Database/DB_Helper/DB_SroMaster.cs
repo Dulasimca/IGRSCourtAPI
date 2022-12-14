@@ -24,19 +24,21 @@ namespace IGRSCourtAPI.Database.DB_Helper
         /// <returns></returns>
         public List<Sro_master_Model> GetSroMaster()
         {
-            List<Sro_master_Model> response = new List<Sro_master_Model>();
-            var dataList = _DataContext.Sro_Masters.OrderBy(e=> e.sroname).ToList();
-            dataList.ForEach(row => response.Add(new Sro_master_Model()
-            {
-                sroid = row.sroid,
-                sroname = row.sroname,
-                zoneid = row.zoneid,
-                districtid = row.districtid,
-                createddate = row.createddate,
-                flag = row.flag
-            }));
-
-            return response;
+            var sromaster = (from _dbCaseEntity in _DataContext.Sro_Masters
+                                  join Zone in _DataContext.Zone_Masters on _dbCaseEntity.zoneid equals Zone.zoneid
+                                  join District in _DataContext.District_Masters on _dbCaseEntity.zoneid equals District.districtid
+                             select new Sro_master_Model
+                                  {
+                                        sroid = _dbCaseEntity.sroid,
+                                        sroname = _dbCaseEntity.sroname,
+                                        zoneid = _dbCaseEntity.zoneid,
+                                        districtid = _dbCaseEntity.districtid,
+                                        createddate = _dbCaseEntity.createddate,
+                                        flag = _dbCaseEntity.flag,
+                                        zonename = Zone.zonename,
+                                        districtname = District.districtname,
+                             }).ToList();
+            return sromaster;
         }
 
         /// <summary>

@@ -22,17 +22,18 @@ namespace IGRSCourtAPI.Database.DB_Helper
         /// <returns></returns>
         public List<District_master_Model> GetDistrictMaster()
         {
-            List<District_master_Model> response = new List<District_master_Model>();
-            var dataList = _DataContext.District_Masters.OrderBy(e=> e.districtname).ToList();
-            dataList.ForEach(row => response.Add(new District_master_Model()
-            {
-                districtid = row.districtid,
-                districtname = row.districtname,
-                zoneid = row.zoneid,
-                createddate = row.createddate,
-                flag = row.flag
-            }));
-            return response;
+            var districtmaster = (from _dbCaseEntity in _DataContext.District_Masters
+                                  join Zone in _DataContext.Zone_Masters on _dbCaseEntity.zoneid equals Zone.zoneid
+                                  select new District_master_Model
+                               {
+                                    districtid = _dbCaseEntity.districtid,
+                                    districtname = _dbCaseEntity.districtname,
+                                    zoneid = _dbCaseEntity.zoneid,
+                                    createddate = _dbCaseEntity.createddate,
+                                    flag = _dbCaseEntity.flag,
+                                   zonename = Zone.zonename,
+                               }).ToList();
+            return districtmaster;
         }
 
         /// <summary>

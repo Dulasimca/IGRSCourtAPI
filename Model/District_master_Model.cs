@@ -12,5 +12,6 @@ namespace IGRSCourtAPI.Model
         public int zoneid { get; set; }//, zoneid int
         public DateTime createddate { get; set; }//, createddate timestamp
         public bool flag { get; set; } // , flag boolean
+        public string zonename { get; set; }
     }
 }

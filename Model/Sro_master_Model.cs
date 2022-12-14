@@ -15,5 +15,7 @@ namespace IGRSCourtAPI.Model
         public int districtid { get; set; }// , districtid int
         public DateTime createddate { get; set; } //, createddate timestamp
         public bool flag { get; set; }//, flag boolean
+        public string zonename { get; set; }
+        public string districtname { get; set; }
     }
 }

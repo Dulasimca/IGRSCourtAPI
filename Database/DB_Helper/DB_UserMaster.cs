@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using IGRSCourtAPI.Database;
 using IGRSCourtAPI.Model;
 using IGRSCourtAPI.Database.DB_Entity;
+using IGRSCourtAPI.Common;
 
 namespace IGRSCourtAPI.Database.DB_Helper
 {
@@ -15,30 +16,41 @@ namespace IGRSCourtAPI.Database.DB_Helper
         {
             _DataContext = dataContext;
         }
-
+        Security security = new Security();
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
         public List<Usermaster_Model> GetUserMaster()
         {
-            List<Usermaster_Model> response = new List<Usermaster_Model>();
-            var dataList = _DataContext.usermaster.ToList();
-            dataList.ForEach(row => response.Add(new Usermaster_Model()
-            {
-                userid = row.userid,
-                username = row.username,
-                mailid = row.mailid,
-                password = row.password,
-                mobile = row.mobile,
-                zoneid = row.zoneid,
-                districtid = row.districtid,
-                sroid = row.sroid,
-                roleid = row.roleid,
-                createddate = row.createddate,
-                flag = row.flag
-            }));
-            return response;
+            var usermasters = (from _dbCaseEntity in _DataContext.usermaster
+                               join Role in _DataContext.rolemaster on _dbCaseEntity.roleid equals Role.roleid
+                               join Zone in _DataContext.Zone_Masters on _dbCaseEntity.zoneid equals Zone.zoneid into Zone
+                               from _Zone in Zone.DefaultIfEmpty()
+                               join District in _DataContext.District_Masters on _dbCaseEntity.districtid equals District.districtid into District
+                               from _District in District.DefaultIfEmpty()
+                               join Sro in _DataContext.Sro_Masters on _dbCaseEntity.sroid equals Sro.sroid into sro
+                               from _sro in sro.DefaultIfEmpty()
+
+                               select new Usermaster_Model
+                               {
+                                   userid = _dbCaseEntity.userid,
+                                   username = _dbCaseEntity.username,
+                                   mailid = _dbCaseEntity.mailid,
+                                   password = security.Decryptword(_dbCaseEntity.password),
+                                   mobile = _dbCaseEntity.mobile,
+                                   zoneid = _dbCaseEntity.zoneid,
+                                   districtid = _dbCaseEntity.districtid,
+                                   sroid = _dbCaseEntity.sroid,
+                                   roleid = _dbCaseEntity.roleid,
+                                   createddate = _dbCaseEntity.createddate,
+                                   flag = _dbCaseEntity.flag,
+                                   zonename = _Zone.zonename,
+                                   districtname = _District.districtname,
+                                   sroname = _sro.sroname,
+                                   rolename = Role.rolename,
+                               }).ToList();
+            return usermasters;
         }
 
         /// <summary>
@@ -49,18 +61,18 @@ namespace IGRSCourtAPI.Database.DB_Helper
         {
             Usermaster_Model response = new Usermaster_Model();
             var dataList = _DataContext.usermaster.Where(a => a.userid == _userid).FirstOrDefault();
-                response.userid = dataList.userid;
-                response.username = dataList.username;
-                response.mailid = dataList.mailid;
-                response.password = dataList.password;
-                response.mobile = dataList.mobile;
-                response.zoneid = dataList.zoneid;
-                response.districtid = dataList.districtid;
-                response.sroid = dataList.sroid;
-                response.roleid = dataList.roleid;
-                response.createddate = dataList.createddate;
-                response.flag = dataList.flag;
-                return response;
+            response.userid = dataList.userid;
+            response.username = dataList.username;
+            response.mailid = dataList.mailid;
+            response.password = security.Decryptword(dataList.password);
+            response.mobile = dataList.mobile;
+            response.zoneid = dataList.zoneid;
+            response.districtid = dataList.districtid;
+            response.sroid = dataList.sroid;
+            response.roleid = dataList.roleid;
+            response.createddate = dataList.createddate;
+            response.flag = dataList.flag;
+            return response;
         }
 
         /// <summary>
@@ -75,6 +87,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
             {
                 Usermaster _userMaster = new Usermaster(); // from database db entity table
                 // Usermaster  = new Usermaster_Model();
+                usermaster.password = security.Encryptword(usermaster.password);
                 if (usermaster.userid > 0)
                 {
                     //PUT
@@ -85,36 +98,56 @@ namespace IGRSCourtAPI.Database.DB_Helper
                         _userMaster.mailid = usermaster.mailid;
                         _userMaster.password = usermaster.password;
                         _userMaster.mobile = usermaster.mobile;
-                        _userMaster.zoneid = usermaster.zoneid;
-                        _userMaster.districtid = usermaster.districtid;
-                        _userMaster.sroid = usermaster.sroid;
+                        if (usermaster.zoneid > 0)
+                        {
+                            _userMaster.zoneid = usermaster.zoneid;
+                        }
+                        if (usermaster.districtid > 0)
+                        {
+                            _userMaster.districtid = usermaster.districtid;
+                        }
+                        if (usermaster.sroid > 0)
+                        {
+                            _userMaster.sroid = usermaster.sroid;
+                        }
                         _userMaster.roleid = usermaster.roleid;
                         _userMaster.createddate = usermaster.createddate;
                         _userMaster.flag = usermaster.flag;
-                        
+
                     }
                 }
                 else
                 {
                     //POST
-                        _userMaster.username = usermaster.username;
-                        _userMaster.mailid = usermaster.mailid;
-                        _userMaster.password = usermaster.password;
-                        _userMaster.mobile = usermaster.mobile;
+                    _userMaster.username = usermaster.username;
+                    _userMaster.mailid = usermaster.mailid;
+                    _userMaster.password = usermaster.password;
+                    _userMaster.mobile = usermaster.mobile;
+                    if(usermaster.zoneid >0)
+                    {
                         _userMaster.zoneid = usermaster.zoneid;
+                    }
+                    if (usermaster.districtid > 0)
+                    {
                         _userMaster.districtid = usermaster.districtid;
+                    }
+                       
+                    if (usermaster.sroid > 0)
+                    {
                         _userMaster.sroid = usermaster.sroid;
-                        _userMaster.roleid = usermaster.roleid;
-                        _userMaster.createddate = usermaster.createddate;
-                        _userMaster.flag = usermaster.flag;
-                        _DataContext.usermaster.Add(_userMaster);
+                    }
+                    _userMaster.roleid = usermaster.roleid;
+                    _userMaster.createddate = usermaster.createddate;
+                    _userMaster.flag = usermaster.flag;
+                    _DataContext.usermaster.Add(_userMaster);
                 }
                 _DataContext.SaveChanges();
                 isSuccess = true;
             }
             catch (Exception ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
+
             }
             return isSuccess;
         }
