@@ -75,6 +75,27 @@ namespace IGRSCourtAPI.Database.DB_Helper
             return response;
         }
 
+        public Usermaster_Model GetUserMasterByName(string username)
+        {
+            Usermaster_Model response = new Usermaster_Model();
+            var _dataFromDB = _DataContext.usermaster.Where(a => a.username == username).FirstOrDefault();
+            if (_dataFromDB != null)
+            {
+                response.userid = _dataFromDB.userid;
+                response.username = _dataFromDB.username;
+                response.mailid = _dataFromDB.mailid;
+                response.password = _dataFromDB.password;
+                response.mobile = _dataFromDB.mobile;
+                response.zoneid = _dataFromDB.zoneid;
+                response.districtid = _dataFromDB.districtid;
+                response.sroid = _dataFromDB.sroid;
+                response.roleid = _dataFromDB.roleid;
+                response.createddate = _dataFromDB.createddate;
+                response.flag = _dataFromDB.flag;
+            }
+            return response;
+        }
+
         /// <summary>
         /// 
         /// </summary>
