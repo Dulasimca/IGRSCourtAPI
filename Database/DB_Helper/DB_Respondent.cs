@@ -137,6 +137,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
             dbEntity.casenumber = _caseModel.casenumber;
             dbEntity.casestatusid = _caseModel.casestatusid;
             dbEntity.casetypeid = _caseModel.casetypeid;
+            dbEntity.judgementid = _caseModel.judgementid;
             dbEntity.caseyear = _caseModel.caseyear;
             dbEntity.counterfiled = _caseModel.counterfiled;
             dbEntity.flag = _caseModel.flag;
