@@ -46,7 +46,8 @@ namespace IGRSCourtAPI.Database.DB_Helper
             return _modelList;
         }
 
-        public List<Courtcase_Model> GetCourtcase(int _userid, int _respondentType, string _fromdate, string _todate)
+        public List<Courtcase_Model> GetCourtcase(int _userid, int _respondentType, string _fromdate, string _todate,
+            int _zoneid, int _sroid, int _districtid)
         {
             var _caseModel = (from _dbCaseEntity in  _DataContext.Courtcases 
                              join Zone in  _DataContext.Zone_Masters on _dbCaseEntity.zoneid equals Zone.zoneid
@@ -55,8 +56,9 @@ namespace IGRSCourtAPI.Database.DB_Helper
                              join CaseType in  _DataContext.Casetype_Masters on _dbCaseEntity.casetypeid equals CaseType.casetypeid
                              join Court in  _DataContext.Court_Masters on _dbCaseEntity.courtid equals Court.courtid
                              join CaseStatus in  _DataContext.Casestatus_Masters on _dbCaseEntity.casestatusid equals CaseStatus.casestatusid
-                             where _dbCaseEntity.userid == _userid && _dbCaseEntity.casedate >= Convert.ToDateTime(_fromdate)
+                             where _dbCaseEntity.casedate >= Convert.ToDateTime(_fromdate)
                              && _dbCaseEntity.casedate <= Convert.ToDateTime(_todate) && _dbCaseEntity.responsetypeid == _respondentType
+                             //&& _dbCaseEntity.zoneid == _zoneid && _dbCaseEntity.districtid == _districtid && _dbCaseEntity.sroid == _sroid
                               select new Courtcase_Model
                              {
                                     courtcaseid = _dbCaseEntity.courtcaseid,
@@ -85,9 +87,34 @@ namespace IGRSCourtAPI.Database.DB_Helper
                                     casetypename = CaseType.casetypename,
                                     courtname = Court.courtname
                              }).ToList();
-                             //.Where(x => x.courtcaseid == _caseid).FirstOrDefault();//from db
-            
-            return _caseModel;
+            //.Where(x => x.courtcaseid == _caseid).FirstOrDefault();//from db
+            return FilterCourtCases(_zoneid, _districtid, _sroid, _caseModel);
+        }
+
+        public List<Courtcase_Model> FilterCourtCases(int zoneid, int districtid, int sroid, List<Courtcase_Model> list)
+        {
+            List <Courtcase_Model > filteredList = new List<Courtcase_Model>();
+            if(zoneid == 0)
+            {
+                filteredList = list;
+            }
+            else if(zoneid > 0 && districtid == 0)
+            {
+                filteredList = list.Where(a => a.zoneid == zoneid).ToList();
+            }
+            else if(zoneid > 0 && districtid > 0 && sroid == 0)
+            {
+                filteredList = list.Where(a => a.zoneid == zoneid && a.districtid == districtid).ToList();
+            }
+            else if (zoneid > 0 && districtid > 0 && sroid > 0)
+            {
+                filteredList = list.Where(a => a.zoneid == zoneid && a.districtid == districtid && a.sroid == sroid).ToList();
+            } 
+            else
+            {
+                filteredList = list;
+            }
+            return filteredList;
         }
 
         public bool saveCourtCases(Courtcase_Model _caseModel)
