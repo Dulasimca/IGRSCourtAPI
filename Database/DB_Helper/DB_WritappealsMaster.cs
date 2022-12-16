@@ -47,12 +47,13 @@ namespace IGRSCourtAPI.Database.DB_Helper
                                   join CaseType in _DataContext.Casetype_Masters on _dbCaseEntity.casetypeid equals CaseType.casetypeid
                                   join Court in _DataContext.Court_Masters on _dbCaseEntity.courtid equals Court.courtid
                                   join CaseStatus in _DataContext.Casestatus_Masters on _dbCaseEntity.casestatusid equals CaseStatus.casestatusid
-                                   join Writappeals in _DataContext.Writappeals_Masters on _dbCaseEntity.courtcaseid equals Writappeals.courtcaseid into writ
+                                  join Writappeals in _DataContext.Writappeals_Masters on _dbCaseEntity.courtcaseid equals Writappeals.courtcaseid into writ
                                         from _write in writ.DefaultIfEmpty()
                                   where _dbCaseEntity.zoneid == zoneid && _dbCaseEntity.districtid == districtid
-                                   && _dbCaseEntity.sroid == sroid && _dbCaseEntity.casetypeid == casetypeid
+                                  && _dbCaseEntity.sroid == sroid && _dbCaseEntity.casetypeid == casetypeid
                                   select new Writappeals_master_Model
                                   {
+                                      writappealsid = _write.writappealsid > 0 ? _write.writappealsid : 0,
                                       courtcaseid = _dbCaseEntity.courtcaseid,
                                       zoneid = _dbCaseEntity.zoneid,
                                       districtid = _dbCaseEntity.districtid,
@@ -78,7 +79,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
                                       casetypename = CaseType.casetypename,
                                       courtname = Court.courtname,
                                       regularnumber = _write.regularnumber,
-                                      writ_remarks = _write.remarks
+                                      remarks = _write.remarks
 
                                   }).ToList();
 
@@ -110,13 +111,13 @@ namespace IGRSCourtAPI.Database.DB_Helper
                     _writappealsMaster = _DataContext.Writappeals_Masters.Where(d => d.writappealsid.Equals(writappeals_Master.writappealsid)).FirstOrDefault();
                     if (_writappealsMaster != null)
                     {
-                        _writappealsMaster = Managewritappeals(writappeals_Master);
+                        _writappealsMaster = Managewritappeals(_writappealsMaster,writappeals_Master);
                     }
                 }
                 else
                 {
                     //POST
-                    _writappealsMaster = Managewritappeals(writappeals_Master);
+                    _writappealsMaster = Managewritappeals(_writappealsMaster,writappeals_Master);
                     _DataContext.Writappeals_Masters.Add(_writappealsMaster);
                 }
                 _DataContext.SaveChanges();
@@ -129,16 +130,15 @@ namespace IGRSCourtAPI.Database.DB_Helper
             return isSuccess;
         }
 
-        public Writappeals_master Managewritappeals(Writappeals_master_Model writappeals_Master)
+        public Writappeals_master Managewritappeals(Writappeals_master _writappealsMaster,Writappeals_master_Model writappeals_Master)
         {
-            Writappeals_master _writappealsMaster = new Writappeals_master();
             _writappealsMaster.zoneid = writappeals_Master.zoneid;
             _writappealsMaster.districtid = writappeals_Master.districtid;
             _writappealsMaster.sroid = writappeals_Master.sroid;
             _writappealsMaster.courtcaseid = writappeals_Master.courtcaseid;
             _writappealsMaster.regularnumber = writappeals_Master.regularnumber;
             _writappealsMaster.createddate = writappeals_Master.createddate;
-            _writappealsMaster.remarks = writappeals_Master.writ_remarks;
+            _writappealsMaster.remarks = writappeals_Master.remarks;
             _writappealsMaster.flag = writappeals_Master.flag;
             return _writappealsMaster;
         }
