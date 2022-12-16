@@ -20,12 +20,12 @@ namespace IGRSCourtAPI.Controllers
 
             [HttpGet]
             [Route("api/[controller]/GetWritappealsMaster")]
-            public IActionResult Get(int zoneid, int districtid, int sroid, int courtcaseid)
+            public IActionResult Get(int zoneid, int districtid, int sroid, int casetypeid)
             {
                 ResponseType type = ResponseType.Success;
                 try
                 {
-                    IEnumerable<Writappeals_master_Model> data = _db.GetWritappealsMaster(zoneid, districtid, sroid, courtcaseid);
+                    List<Writappeals_master_Model> data = _db.GetWritappealsMaster(zoneid, districtid, sroid, casetypeid);
                     if (!data.Any())
                     {
                         type = ResponseType.NotFound;
@@ -41,8 +41,8 @@ namespace IGRSCourtAPI.Controllers
 
         // POST api/<WritappealsController>
         [HttpPost]
-            [Route("api/[controller]/Writappeals")]
-            public IActionResult Post([FromBody] Writappeals_master_Model model)
+        [Route("api/[controller]/SaveWritappealsMaster")]
+        public IActionResult Post([FromBody] Writappeals_master_Model model)
             {
                 try
                 {

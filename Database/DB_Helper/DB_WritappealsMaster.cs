@@ -20,68 +20,76 @@ namespace IGRSCourtAPI.Database.DB_Helper
         /// </summary>
         /// <returns></returns>
 
-        public List<Writappeals_master_Model> GetWritappealsMaster(int zoneid, int districtid, int sroid, int courtcaseid)
+        public List<Writappeals_master_Model> GetWritappealsMaster(int zoneid, int districtid, int sroid, int casetypeid)
         {
-            List<Writappeals_master_Model> response = new List<Writappeals_master_Model>();
-            //var dataList = _DataContext.Writappeals_Masters.OrderBy(a => a.writappeals).ToList();
-            //dataList.ForEach(row => response.Add(new Writappeals_master_Model()
-            //{
-            //    writappealsid = row.writappealsid,
-            //    zoneid = row.zoneid,
-            //    districtid = row.districtid,
-            //    sroid = row.sroid,
-            //    courtcaseid = row.courtcaseid,
-            //    regularnumber = row.regularnumber,
-            //    natureofdisposal = row.natureofdisposal,
-            //    remarks = row.remarks,
-            //    createddate = row.createddate,
-            //    flag = row.flag
-            //}));
+            try
+            {
+                //var dataList = _DataContext.Writappeals_Masters.OrderBy(a => a.writappeals).ToList();
+                //dataList.ForEach(row => response.Add(new Writappeals_master_Model()
+                //{
+                //    writappealsid = row.writappealsid,
+                //    zoneid = row.zoneid,
+                //    districtid = row.districtid,
+                //    sroid = row.sroid,
+                //    courtcaseid = row.courtcaseid,
+                //    regularnumber = row.regularnumber,
+                //    natureofdisposal = row.natureofdisposal,
+                //    remarks = row.remarks,
+                //    createddate = row.createddate,
+                //    flag = row.flag
+                //}));
 
 
-            var _caseModel = (from _dbCaseEntity in _DataContext.Courtcases
-                              join Zone in _DataContext.Zone_Masters on _dbCaseEntity.zoneid equals Zone.zoneid
-                              join District in _DataContext.District_Masters on _dbCaseEntity.zoneid equals District.districtid
-                              join Sro in _DataContext.Sro_Masters on _dbCaseEntity.sroid equals Sro.sroid
-                              join CaseType in _DataContext.Casetype_Masters on _dbCaseEntity.casetypeid equals CaseType.casetypeid
-                              join Court in _DataContext.Court_Masters on _dbCaseEntity.courtid equals Court.courtid
-                              join CaseStatus in _DataContext.Casestatus_Masters on _dbCaseEntity.casestatusid equals CaseStatus.casestatusid
-                              join Writappeals in _DataContext.Writappeals_Masters on _dbCaseEntity.courtcaseid equals Writappeals.courtcaseid
-                              where _dbCaseEntity.zoneid == zoneid && _dbCaseEntity.districtid == districtid
-                               && _dbCaseEntity.sroid == sroid && _dbCaseEntity.courtcaseid == courtcaseid
-                              select new Writappeals_master_Model
-                              {
-                                  courtcaseid = _dbCaseEntity.courtcaseid,
-                                  zoneid = _dbCaseEntity.zoneid,
-                                  districtid = _dbCaseEntity.districtid,
-                                  sroid = _dbCaseEntity.sroid,
-                                  //   remarks = _dbCaseEntity.remarks,
-                                  responsetypeid = _dbCaseEntity.responsetypeid,
-                                  petitionername = _dbCaseEntity.petitionername,
-                                  mainrespondents = _dbCaseEntity.mainrespondents,
-                                  casedate = _dbCaseEntity.casedate,
-                                  casenumber = _dbCaseEntity.casenumber,
-                                  casestatusid = _dbCaseEntity.casestatusid,
-                                  casetypeid = _dbCaseEntity.casetypeid,
-                                  caseyear = _dbCaseEntity.caseyear,
-                                  mainprayer = _dbCaseEntity.mainprayer,
-                                  createdate = _dbCaseEntity.createdate,
-                                  courtid = _dbCaseEntity.courtid,
-                                  flag = _dbCaseEntity.flag,
-                                  userid = _dbCaseEntity.userid,
-                                  zonename = Zone.zonename,
-                                  districtname = District.districtname,
-                                  sroname = Sro.sroname,
-                                  casestatusname = CaseStatus.casestatusname,
-                                  casetypename = CaseType.casetypename,
-                                  courtname = Court.courtname,
-                                  regularnumber = Writappeals.regularnumber,
-                                  natureofdisposal = Writappeals.natureofdisposal,
-                                  writ_remarks = Writappeals.writ_remarks
+                var _caseModel = (from _dbCaseEntity in _DataContext.Courtcases
+                                  join Zone in _DataContext.Zone_Masters on _dbCaseEntity.zoneid equals Zone.zoneid
+                                  join District in _DataContext.District_Masters on _dbCaseEntity.districtid equals District.districtid
+                                  join Sro in _DataContext.Sro_Masters on _dbCaseEntity.sroid equals Sro.sroid
+                                  join CaseType in _DataContext.Casetype_Masters on _dbCaseEntity.casetypeid equals CaseType.casetypeid
+                                  join Court in _DataContext.Court_Masters on _dbCaseEntity.courtid equals Court.courtid
+                                  join CaseStatus in _DataContext.Casestatus_Masters on _dbCaseEntity.casestatusid equals CaseStatus.casestatusid
+                                   join Writappeals in _DataContext.Writappeals_Masters on _dbCaseEntity.courtcaseid equals Writappeals.courtcaseid into writ
+                                        from _write in writ.DefaultIfEmpty()
+                                  where _dbCaseEntity.zoneid == zoneid && _dbCaseEntity.districtid == districtid
+                                   && _dbCaseEntity.sroid == sroid && _dbCaseEntity.casetypeid == casetypeid
+                                  select new Writappeals_master_Model
+                                  {
+                                      courtcaseid = _dbCaseEntity.courtcaseid,
+                                      zoneid = _dbCaseEntity.zoneid,
+                                      districtid = _dbCaseEntity.districtid,
+                                      sroid = _dbCaseEntity.sroid,
+                                      //   remarks = _dbCaseEntity.remarks,
+                                      responsetypeid = _dbCaseEntity.responsetypeid,
+                                      petitionername = _dbCaseEntity.petitionername,
+                                      mainrespondents = _dbCaseEntity.mainrespondents,
+                                      casedate = _dbCaseEntity.casedate,
+                                      casenumber = _dbCaseEntity.casenumber,
+                                      casestatusid = _dbCaseEntity.casestatusid,
+                                      casetypeid = _dbCaseEntity.casetypeid,
+                                      caseyear = _dbCaseEntity.caseyear,
+                                      mainprayer = _dbCaseEntity.mainprayer,
+                                      createdate = _dbCaseEntity.createdate,
+                                      courtid = _dbCaseEntity.courtid,
+                                      flag = _dbCaseEntity.flag,
+                                      userid = _dbCaseEntity.userid,
+                                      zonename = Zone.zonename,
+                                      districtname = District.districtname,
+                                      sroname = Sro.sroname,
+                                      casestatusname = CaseStatus.casestatusname,
+                                      casetypename = CaseType.casetypename,
+                                      courtname = Court.courtname,
+                                      regularnumber = _write.regularnumber,
+                                      writ_remarks = _write.remarks
 
-                              }).ToList();
+                                  }).ToList();
 
-            return response;
+                return _caseModel;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+          
         }
 
         /// <summary>
@@ -129,8 +137,8 @@ namespace IGRSCourtAPI.Database.DB_Helper
             _writappealsMaster.sroid = writappeals_Master.sroid;
             _writappealsMaster.courtcaseid = writappeals_Master.courtcaseid;
             _writappealsMaster.regularnumber = writappeals_Master.regularnumber;
-            _writappealsMaster.natureofdisposal = writappeals_Master.natureofdisposal;
-            _writappealsMaster.writ_remarks = writappeals_Master.writ_remarks;
+            _writappealsMaster.createddate = writappeals_Master.createddate;
+            _writappealsMaster.remarks = writappeals_Master.writ_remarks;
             _writappealsMaster.flag = writappeals_Master.flag;
             return _writappealsMaster;
         }
