@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IGRSCourtAPI.Database.DB_Entity
+
 {
     [Table("writappealsmaster")]
     public class Writappeals_master
