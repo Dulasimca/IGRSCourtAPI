@@ -25,6 +25,8 @@ namespace IGRSCourtAPI.Database.DB_Entity
         public string mainprayer { get; set; }//, mainprayer varchar(2000)
         public bool counterfiled { get; set; } //, counterfiled boolean
         public int casestatusid { get; set; }//, casestatusid       int 
+        //public int judgementid { get; set; }//, judgementid..int
+        public bool judgementvalue { get; set; }
         public string remarks { get; set; } // , remarks varchar(1000)
         public int responsetypeid { get; set; } //    , responsetypeid int
         public DateTime casedate { get; set; } //, casedate date

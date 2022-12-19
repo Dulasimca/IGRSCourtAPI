@@ -23,7 +23,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
         public List<Judgement_master_model> GetJudgementMaster()
         {
             List<Judgement_master_model> response = new List<Judgement_master_model>();
-            var dataList = _DataContext.judgementmaster.OrderBy(e => e.judgementname).ToList();
+            var dataList = _DataContext.judgementmaster.OrderBy(e => e.judgementid).ToList();
             dataList.ForEach(row => response.Add(new Judgement_master_model()
             {
                 judgementid = row.judgementid,
@@ -38,10 +38,10 @@ namespace IGRSCourtAPI.Database.DB_Helper
         /// 
         /// </summary>
         /// <returns></returns>
-        public Judgement_master_model GetJudgementMaster(int _judgementmaster)
+        public Judgement_master_model GetJudgementMaster(int _judgementid)
         {
             Judgement_master_model response = new Judgement_master_model();
-            var dataList = _DataContext.judgementmaster.Where(a => a.judgementid == _judgementmaster).FirstOrDefault();
+            var dataList = _DataContext.judgementmaster.Where(a => a.judgementid == _judgementid).FirstOrDefault();
             response.judgementid = dataList.judgementid;
             response.judgementname = dataList.judgementname;
             response.createddate = dataList.createddate;
