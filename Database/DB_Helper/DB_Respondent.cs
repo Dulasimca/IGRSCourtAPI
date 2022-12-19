@@ -40,6 +40,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
                 counterfiled = row.counterfiled,
                 mainprayer = row.mainprayer,
                 createdate = row.createdate,
+                judgementvalue = row.judgementvalue,
                 courtid = row.courtid,
                 flag = row.flag
             }));
@@ -75,6 +76,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
                                     casetypeid = _dbCaseEntity.casetypeid,
                                     caseyear = _dbCaseEntity.caseyear,
                                     counterfiled = _dbCaseEntity.counterfiled,
+                                    judgementvalue = _dbCaseEntity.judgementvalue,
                                     mainprayer = _dbCaseEntity.mainprayer,
                                     createdate = _dbCaseEntity.createdate,
                                     courtid = _dbCaseEntity.courtid,
@@ -164,7 +166,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
             dbEntity.casenumber = _caseModel.casenumber;
             dbEntity.casestatusid = _caseModel.casestatusid;
             dbEntity.casetypeid = _caseModel.casetypeid;
-            dbEntity.judgementid = _caseModel.judgementid;
+            dbEntity.judgementvalue = _caseModel.judgementvalue;
             dbEntity.caseyear = _caseModel.caseyear;
             dbEntity.counterfiled = _caseModel.counterfiled;
             dbEntity.flag = _caseModel.flag;
