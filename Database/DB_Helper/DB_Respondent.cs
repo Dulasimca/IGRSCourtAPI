@@ -52,7 +52,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
         {
             var _caseModel = (from _dbCaseEntity in  _DataContext.Courtcases 
                              join Zone in  _DataContext.Zone_Masters on _dbCaseEntity.zoneid equals Zone.zoneid
-                             join District in  _DataContext.District_Masters on _dbCaseEntity.zoneid equals District.districtid
+                             join District in  _DataContext.District_Masters on _dbCaseEntity.districtid equals District.districtid
                              join Sro in  _DataContext.Sro_Masters on _dbCaseEntity.sroid equals Sro.sroid
                              join CaseType in  _DataContext.Casetype_Masters on _dbCaseEntity.casetypeid equals CaseType.casetypeid
                              join Court in  _DataContext.Court_Masters on _dbCaseEntity.courtid equals Court.courtid
