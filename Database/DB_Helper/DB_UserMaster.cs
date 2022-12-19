@@ -93,6 +93,10 @@ namespace IGRSCourtAPI.Database.DB_Helper
                 response.createddate = _dataFromDB.createddate;
                 response.flag = _dataFromDB.flag;
             }
+            else
+            {
+                response = null;
+            }
             return response;
         }
 
