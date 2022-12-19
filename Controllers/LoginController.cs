@@ -22,10 +22,10 @@ namespace IGRSCourtAPI.Controllers
         [HttpGet]
         public Tuple<bool, string, Usermaster_Model> GetLogin(string username, string password)
         {
-            Usermaster_Model _user = new Usermaster_Model();
+           // Usermaster_Model _user = new Usermaster_Model();
             try
             {
-                _user =  _db.GetUserMasterByName(username);
+               var _user =  _db.GetUserMasterByName(username);
                 if (_user == null)
                 {
                     return new Tuple<bool, string, Usermaster_Model>(false, "Username mismatch", _user);
