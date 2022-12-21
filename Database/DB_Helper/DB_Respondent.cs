@@ -155,7 +155,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
         {
             dbEntity.zoneid = _caseModel.zoneid;
             dbEntity.districtid = _caseModel.districtid;
-            dbEntity.sroid = _caseModel.sroid;
+            dbEntity.sroid = _caseModel.sroid;  
             dbEntity.petitionername = _caseModel.petitionername;
             dbEntity.remarks = _caseModel.remarks;
             dbEntity.responsetypeid = _caseModel.responsetypeid;

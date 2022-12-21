@@ -41,11 +41,7 @@ namespace IGRSCourtAPI.Database
         public DbSet<Writappeals_master> Writappeals_Masters { get; set; }
         public DbSet<ChangePassword> changepassword { get; set; }
 
-
-
-
-
-
+        public DbSet<SupremeCourtCase> SupremeCourtCase { get; set; }
 
     }
 }
