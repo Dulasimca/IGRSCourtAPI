@@ -39,7 +39,7 @@ namespace IGRSCourtAPI.Model
         public string casetypename { get; set; }
         public string courtname { get; set; }
         public string casestatusname { get; set; }
-
+        public string writappealstatusname { get; set; }
     }
 
   
