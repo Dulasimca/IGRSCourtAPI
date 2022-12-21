@@ -31,7 +31,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
             List<Respondant_master_model> respondant_Master_Models = new List<Respondant_master_model>();
             List<Slp_master_model> slp_Master_Models = new List<Slp_master_model>();
             //List<Judgement_master_model> judgement_Master_Models = new List<Judgement_master_model>();
-            List<Menu_Model> menu_Models = new List<Menu_Model>();
+           // List<Menu_Model> menu_Models = new List<Menu_Model>();
             List<Writappealstatus_master_Model> writappealstatus_Master_Model = new List<Writappealstatus_master_Model>();
 
             try
@@ -47,7 +47,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
                 var RespondentMasterList = _DataContext.respondentsmaster.ToList();
                 var SlpMasterList = _DataContext.slpmaster.ToList();
                 //var JudgementMasterList = _DataContext.judgementmaster.ToList();
-                var MenuMasterList = _DataContext.Menumasters.ToList();
+               // var MenuMasterList = _DataContext.Menumasters.ToList();
                 var WritappealstatusList = _DataContext.Writappealstatus_Masters.ToList();
 
                 ZoneList.ForEach(row => zone_Master_Model.Add(new Zone_master_Model()
@@ -161,7 +161,6 @@ namespace IGRSCourtAPI.Database.DB_Helper
                     respondentsmaster = respondant_Master_Models,
                     slpmaster = slp_Master_Models,
                     //judgementmaster = judgement_Master_Models,
-                    menumaster = menu_Models,
                     Writappealstatus_Masters = writappealstatus_Master_Model,
 
                 };
