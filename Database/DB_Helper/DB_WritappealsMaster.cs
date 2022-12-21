@@ -50,7 +50,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
                                   join Writappeals in _DataContext.Writappeals_Masters on _dbCaseEntity.courtcaseid equals Writappeals.courtcaseid into writ
                                         from _write in writ.DefaultIfEmpty()
                                   where _dbCaseEntity.zoneid == zoneid && _dbCaseEntity.districtid == districtid
-                                  && _dbCaseEntity.sroid == sroid && _dbCaseEntity.casetypeid == casetypeid
+                                  && _dbCaseEntity.sroid == sroid && _dbCaseEntity.casetypeid == casetypeid 
                                   select new Writappeals_master_Model
                                   {
                                       writappealsid = _write.writappealsid > 0 ? _write.writappealsid : 0,
@@ -79,6 +79,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
                                       casetypename = CaseType.casetypename,
                                       courtname = Court.courtname,
                                       regularnumber = _write.regularnumber,
+                                      writappealstatusid = _write.writappealstatusid > 0 ? _write.writappealstatusid : 0,
                                       remarks = _write.remarks
 
                                   }).ToList();
@@ -137,6 +138,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
             _writappealsMaster.sroid = writappeals_Master.sroid;
             _writappealsMaster.courtcaseid = writappeals_Master.courtcaseid;
             _writappealsMaster.regularnumber = writappeals_Master.regularnumber;
+            _writappealsMaster.writappealstatusid = writappeals_Master.writappealstatusid;
             _writappealsMaster.createddate = writappeals_Master.createddate;
             _writappealsMaster.remarks = writappeals_Master.remarks;
             _writappealsMaster.flag = writappeals_Master.flag;
