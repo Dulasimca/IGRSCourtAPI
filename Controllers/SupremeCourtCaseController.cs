@@ -9,7 +9,6 @@ using IGRSCourtAPI.Database;
 
 namespace IGRSCourtAPI.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     public class SupremeCourtCaseController : ControllerBase
     {
