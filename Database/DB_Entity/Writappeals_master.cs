@@ -27,6 +27,7 @@ namespace IGRSCourtAPI.Database.DB_Entity
         public int sroid { get; set; }
         public int courtcaseid { get; set; }
         public string regularnumber { get; set; }
+        public int writappealstatusid { get; set; }
         public string remarks { get; set; }
         public DateTime? createddate { get; set; }
         public bool flag { get; set; }
