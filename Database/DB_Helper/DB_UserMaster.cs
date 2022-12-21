@@ -78,7 +78,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
         public Usermaster_Model GetUserMasterByName(string username)
         {
             Usermaster_Model response = new Usermaster_Model();
-            var _dataFromDB = _DataContext.usermaster.Where(a => a.username == username).FirstOrDefault();
+            var _dataFromDB = _DataContext.usermaster.Where(a => a.username.ToLower() == username.ToLower()).FirstOrDefault();
             if (_dataFromDB != null)
             {
                 response.userid = _dataFromDB.userid;
