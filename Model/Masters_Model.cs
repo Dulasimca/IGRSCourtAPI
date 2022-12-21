@@ -17,7 +17,11 @@ namespace IGRSCourtAPI.Model
         public List<Respondant_master_model> respondentsmaster { get; set; }
         public List<Slp_master_model> slpmaster { get; set; }
         public List<Judgement_master_model> judgementmaster { get; set; }
+<<<<<<< HEAD
         public List<Menu_Model> menumaster { get; set; }
         public List<Writappealstatus_master_Model> Writappealstatus_Masters { get; internal set; }
+=======
+
+>>>>>>> 464eb3c9ca60e2a2ab21773337a2fbd67cb417fe
     }
 }

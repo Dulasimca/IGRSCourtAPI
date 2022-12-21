@@ -9,9 +9,9 @@ namespace IGRSCourtAPI.Model
     {
         public int userid { get; set; }  
         public string username { get; set; }  
-        public string mailid { get; set; }  
+        public string? mailid { get; set; }  
         public string password { get; set; }  
-        public string mobile { get; set; }  
+        public string? mobile { get; set; }  
         public int? zoneid { get; set; }  
         public int? districtid { get; set; }  
         public int? sroid { get; set; }  

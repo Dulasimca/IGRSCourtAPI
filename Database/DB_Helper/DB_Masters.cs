@@ -49,7 +49,6 @@ namespace IGRSCourtAPI.Database.DB_Helper
                 //var JudgementMasterList = _DataContext.judgementmaster.ToList();
                 var MenuMasterList = _DataContext.Menumasters.ToList();
                 var WritappealstatusList = _DataContext.Writappealstatus_Masters.ToList();
-                
 
                 ZoneList.ForEach(row => zone_Master_Model.Add(new Zone_master_Model()
                 {
@@ -134,18 +133,18 @@ namespace IGRSCourtAPI.Database.DB_Helper
                 //    flag = row.flag
                 //}));
 
-                MenuMasterList.ForEach(row => menu_Models.Add(new Menu_Model()
-                {
-                    menuid = row.menuid,
-                    id = row.id,
-                    name = row.name,
-                    url = row.url,
-                    parentid = row.parentid,
-                    icon = row.icon,
-                    roleid = row.roleid,
-                    isactive = row.isactive,
-                    priorities = row.priorities
-                }));
+                //MenuMasterList.ForEach(row => menu_Models.Add(new Menu_Model()
+                //{
+                //    menuid = row.menuid,
+                //    id = row.id,
+                //    name = row.name,
+                //    url = row.url,
+                //    parentid = row.parentid,
+                //    icon = row.icon,
+                //    roleid = row.roleid,
+                //    isactive = row.isactive,
+                //    priorities = row.priorities
+                //}));
 
 
 
@@ -163,7 +162,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
                     slpmaster = slp_Master_Models,
                     //judgementmaster = judgement_Master_Models,
                     menumaster = menu_Models,
-                    Writappealstatus_Masters = writappealstatus_Master_Model
+                    Writappealstatus_Masters = writappealstatus_Master_Model,
 
                 };
                 return masters_Model;
