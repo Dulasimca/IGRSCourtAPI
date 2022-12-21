@@ -31,8 +31,6 @@ namespace IGRSCourtAPI.Database.DB_Helper
             List<Respondant_master_model> respondant_Master_Models = new List<Respondant_master_model>();
             List<Slp_master_model> slp_Master_Models = new List<Slp_master_model>();
             //List<Judgement_master_model> judgement_Master_Models = new List<Judgement_master_model>();
-            List<Menu_Model> menu_Models = new List<Menu_Model>();
-
             try
             {
 
@@ -46,7 +44,6 @@ namespace IGRSCourtAPI.Database.DB_Helper
                 var RespondentMasterList = _DataContext.respondentsmaster.ToList();
                 var SlpMasterList = _DataContext.slpmaster.ToList();
                 //var JudgementMasterList = _DataContext.judgementmaster.ToList();
-                var MenuMasterList = _DataContext.Menumasters.ToList();
                 
 
                 ZoneList.ForEach(row => zone_Master_Model.Add(new Zone_master_Model()
@@ -125,18 +122,18 @@ namespace IGRSCourtAPI.Database.DB_Helper
                 //    flag = row.flag
                 //}));
 
-                MenuMasterList.ForEach(row => menu_Models.Add(new Menu_Model()
-                {
-                    menuid = row.menuid,
-                    id = row.id,
-                    name = row.name,
-                    url = row.url,
-                    parentid = row.parentid,
-                    icon = row.icon,
-                    roleid = row.roleid,
-                    isactive = row.isactive,
-                    priorities = row.priorities
-                }));
+                //MenuMasterList.ForEach(row => menu_Models.Add(new Menu_Model()
+                //{
+                //    menuid = row.menuid,
+                //    id = row.id,
+                //    name = row.name,
+                //    url = row.url,
+                //    parentid = row.parentid,
+                //    icon = row.icon,
+                //    roleid = row.roleid,
+                //    isactive = row.isactive,
+                //    priorities = row.priorities
+                //}));
 
 
 
@@ -153,8 +150,6 @@ namespace IGRSCourtAPI.Database.DB_Helper
                     respondentsmaster = respondant_Master_Models,
                     slpmaster = slp_Master_Models,
                     //judgementmaster = judgement_Master_Models,
-                    menumaster = menu_Models
-
                 };
                 return masters_Model;
             }
