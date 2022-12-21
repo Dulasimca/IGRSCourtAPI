@@ -18,5 +18,6 @@ namespace IGRSCourtAPI.Model
         public List<Slp_master_model> slpmaster { get; set; }
         public List<Judgement_master_model> judgementmaster { get; set; }
         public List<Writappealstatus_master_Model> Writappealstatus_Masters { get; internal set; }
+
     }
 }

@@ -49,6 +49,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
                                   join CaseStatus in _DataContext.Casestatus_Masters on _dbCaseEntity.casestatusid equals CaseStatus.casestatusid
                                   join Writappeals in _DataContext.Writappeals_Masters on _dbCaseEntity.courtcaseid equals Writappeals.courtcaseid into writ
                                         from _write in writ.DefaultIfEmpty()
+                                  join WritAppealsStatus in _DataContext.Writappealstatus_Masters on _write.writappealstatusid equals WritAppealsStatus.writappealstatusid
                                   where _dbCaseEntity.zoneid == zoneid && _dbCaseEntity.districtid == districtid
                                   && _dbCaseEntity.sroid == sroid && _dbCaseEntity.casetypeid == casetypeid 
                                   select new Writappeals_master_Model
@@ -80,6 +81,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
                                       courtname = Court.courtname,
                                       regularnumber = _write.regularnumber,
                                       writappealstatusid = _write.writappealstatusid > 0 ? _write.writappealstatusid : 0,
+                                      writappealstatusname = WritAppealsStatus.writappealstatusname,
                                       remarks = _write.remarks
 
                                   }).ToList();
