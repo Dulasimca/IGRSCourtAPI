@@ -79,6 +79,8 @@ namespace IGRSCourtAPI.Database.DB_Helper
                                       casestatusname = CaseStatus.casestatusname,
                                       casetypename = CaseType.casetypename,
                                       courtname = Court.courtname,
+                                      natureofdisposal = _write.natureofdisposal,
+                                      hcreferenceno = _write.hcreferenceno,
                                       regularnumber = _write.regularnumber,
                                       writappealstatusid = _write.writappealstatusid > 0 ? _write.writappealstatusid : 0,
                                       writappealstatusname = WritAppealsStatus.writappealstatusname,
@@ -140,6 +142,8 @@ namespace IGRSCourtAPI.Database.DB_Helper
             _writappealsMaster.sroid = writappeals_Master.sroid;
             _writappealsMaster.courtcaseid = writappeals_Master.courtcaseid;
             _writappealsMaster.regularnumber = writappeals_Master.regularnumber;
+            _writappealsMaster.hcreferenceno = writappeals_Master.hcreferenceno;
+            _writappealsMaster.natureofdisposal = writappeals_Master.natureofdisposal;
             _writappealsMaster.writappealstatusid = writappeals_Master.writappealstatusid;
             _writappealsMaster.createddate = writappeals_Master.createddate;
             _writappealsMaster.remarks = writappeals_Master.remarks;

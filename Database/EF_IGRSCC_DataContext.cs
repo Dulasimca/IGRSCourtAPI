@@ -40,7 +40,7 @@ namespace IGRSCourtAPI.Database
         public DbSet<Writappeals_master> Writappeals_Masters { get; set; }
         public DbSet<ChangePassword> changepassword { get; set; }
         public DbSet<Writappealstatus_master> Writappealstatus_Masters { get; set; }
-
+        public DbSet<Timebound> Timebound { get; set; }
 
 
 
