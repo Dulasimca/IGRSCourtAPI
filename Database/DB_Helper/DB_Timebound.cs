@@ -30,8 +30,10 @@ namespace IGRSCourtAPI.Database.DB_Helper
                                   join CaseType in _DataContext.Casetype_Masters on _dbCaseEntity.casetypeid equals CaseType.casetypeid
                                   join Court in _DataContext.Court_Masters on _dbCaseEntity.courtid equals Court.courtid
                                   join CaseStatus in _DataContext.Casestatus_Masters on _dbCaseEntity.casestatusid equals CaseStatus.casestatusid
-                                  join Writappeals in _DataContext.Writappeals_Masters on _dbCaseEntity.courtcaseid equals Writappeals.courtcaseid 
+                                  join Writappeal in _DataContext.Writappeals_Masters on _dbCaseEntity.courtcaseid equals Writappeal.courtcaseid into writ
+                                  from Writappeals in writ.DefaultIfEmpty()
                                   join WritAppealsStatus in _DataContext.Writappealstatus_Masters on Writappeals.writappealstatusid equals WritAppealsStatus.writappealstatusid
+                                        into writappeal from _writeappeal in writappeal.DefaultIfEmpty()
                                   join times in _DataContext.Timebound on _dbCaseEntity.courtcaseid equals times.courtcaseid into _times from  _timebound in _times.DefaultIfEmpty()
                                   where _dbCaseEntity.zoneid == zoneid && _dbCaseEntity.districtid == districtid
                                   && _dbCaseEntity.sroid == sroid && _dbCaseEntity.casetypeid == casetypeid && Writappeals.writappealstatusid==2
@@ -57,8 +59,8 @@ namespace IGRSCourtAPI.Database.DB_Helper
                                       sroname = Sro.sroname,
                                       casetypename = CaseType.casetypename,
                                       courtname = Court.courtname,
-                                      writappealstatusname = WritAppealsStatus.writappealstatusname,
-                                      writappealstatusid= Writappeals.writappealstatusid,
+                                      writappealstatusid = Writappeals.writappealstatusid,
+                                      writappealstatusname = _writeappeal.writappealstatusname,
                                       judgementdate = _timebound.timeboundid > 0 ? _timebound.judgementdate : DateTime.Now,
                                       receiptdate = _timebound.timeboundid > 0 ? _timebound.receiptdate:DateTime.Now,
                                       timelimit = _timebound.timelimit,
