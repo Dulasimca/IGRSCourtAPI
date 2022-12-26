@@ -41,7 +41,7 @@ namespace IGRSCourtAPI.Database
         public DbSet<Writappealstatus_master> Writappealstatus_Masters { get; set; }
         public DbSet<SupremeCourtCase> SupremeCourtCase { get; set; }
         public DbSet<Timebound> Timebound { get; set; }
-
+        public DbSet<Pendingenquiry> Pendingenquiry { get; set; }
 
 
 
