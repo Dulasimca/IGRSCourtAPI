@@ -29,6 +29,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
             List<Casetype_master_Model> casetype_Master_Models = new List<Casetype_master_Model>();
             List<Role_master_model> Role_master_models = new List<Role_master_model>();
             List<Respondant_master_model> respondant_Master_Models = new List<Respondant_master_model>();
+            List<Responsetype_master_Model> responsetype_Master_Models = new List<Responsetype_master_Model>();
             List<Slp_master_model> slp_Master_Models = new List<Slp_master_model>();
             //List<Judgement_master_model> judgement_Master_Models = new List<Judgement_master_model>();
            // List<Menu_Model> menu_Models = new List<Menu_Model>();
@@ -45,7 +46,8 @@ namespace IGRSCourtAPI.Database.DB_Helper
                 var CasestatusList = _DataContext.Casestatus_Masters.ToList();
                 var RoleMasterList = _DataContext.rolemaster.ToList();
                 var RespondentMasterList = _DataContext.respondentsmaster.ToList();
-                var SlpMasterList = _DataContext.slpmaster.ToList();
+                var ResponsetypeList = _DataContext.Responsetype_Masters.ToList(); 
+                 var SlpMasterList = _DataContext.slpmaster.ToList();
                 //var JudgementMasterList = _DataContext.judgementmaster.ToList();
                // var MenuMasterList = _DataContext.Menumasters.ToList();
                 var WritappealstatusList = _DataContext.Writappealstatus_Masters.ToList();
@@ -110,6 +112,14 @@ namespace IGRSCourtAPI.Database.DB_Helper
                     flag = row.flag
                 }));
 
+                ResponsetypeList.ForEach(row => responsetype_Master_Models.Add(new Responsetype_master_Model()
+                {
+                    responsetypeid = row.responsetypeid,
+                    responsetypename = row.responsetypename,
+                    createddate = row.createddate,
+                    flag = row.flag
+                }));
+
                 SlpMasterList.ForEach(row => slp_Master_Models.Add(new Slp_master_model()
                 {
                     slpid = row.slpid,
@@ -162,6 +172,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
                     slpmaster = slp_Master_Models,
                     //judgementmaster = judgement_Master_Models,
                     Writappealstatus_Masters = writappealstatus_Master_Model,
+                    responsetype_Masters= responsetype_Master_Models
 
                 };
                 return masters_Model;

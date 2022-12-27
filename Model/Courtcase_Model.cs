@@ -31,6 +31,7 @@ namespace IGRSCourtAPI.Model
         public string casetypename { get; set; }
         public string courtname { get; set; }
         public string casestatusname { get; set; }
+        public string responsetypename { get; set; }
         //public int judgementid { get; set; }
         public bool judgementvalue { get; set; }
 

@@ -33,7 +33,7 @@ namespace IGRSCourtAPI.Controllers
             }
             catch (Exception ex)
             {
-                AuditLog.WriteError("SaveZoneMaster : " + ex.Message);
+                AuditLog.WriteError("SaveRespondentCase : " + ex.Message);
                 return BadRequest(ResponseType.Failure);
             }
         }
@@ -49,7 +49,7 @@ namespace IGRSCourtAPI.Controllers
             }
             catch (Exception ex)
             {
-                AuditLog.WriteError("SaveZoneMaster : " + ex.Message);
+                AuditLog.WriteError("SaveRespondentCase : " + ex.Message);
                 return BadRequest(ResponseType.Failure);
             }
         }
