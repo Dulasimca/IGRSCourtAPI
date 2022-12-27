@@ -42,7 +42,7 @@ namespace IGRSCourtAPI.Database
         public DbSet<SupremeCourtCase> SupremeCourtCase { get; set; }
         public DbSet<Timebound> Timebound { get; set; }
         public DbSet<Pendingenquiry> Pendingenquiry { get; set; }
-
+        public DbSet<Counterfiled_master> counterfiledmaster { get; set; }
 
 
     }

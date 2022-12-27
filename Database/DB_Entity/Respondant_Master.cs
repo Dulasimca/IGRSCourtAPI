@@ -24,6 +24,6 @@ namespace IGRSCourtAPI.Database.DB_Entity
         public string respondentsname { get; set; }//, rolename varchar(200)
         public DateTime createddate { get; set; }//, createddate timestamp
         public bool flag { get; set; } // , flag boolean
-
+        public int responsetypeid { get; set; }
     }
 }
