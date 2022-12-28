@@ -30,7 +30,6 @@ namespace IGRSCourtAPI.Database
         public DbSet<Casetype_master> Casetype_Masters { get; set; }
         public DbSet<Responsetype_master> Responsetype_Masters { get; set; }
         public DbSet<Casestatus_master> Casestatus_Masters { get; set; }
-
         public DbSet<Menumaster> Menumasters { get; set; }
         public DbSet<Usermaster> usermaster { get; set; }
         public DbSet<Role_master> rolemaster { get; set; }
@@ -42,6 +41,9 @@ namespace IGRSCourtAPI.Database
         public DbSet<Writappealstatus_master> Writappealstatus_Masters { get; set; }
         public DbSet<SupremeCourtCase> SupremeCourtCase { get; set; }
         public DbSet<Casehearing> casehearing { get; set; }
+        public DbSet<Timebound> Timebound { get; set; }
+        public DbSet<Pendingenquiry> Pendingenquiry { get; set; }
+        public DbSet<Counterfiled_master> counterfiledmaster { get; set; }
 
 
     }

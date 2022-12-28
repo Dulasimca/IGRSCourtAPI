@@ -83,7 +83,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
                 Casehearing _casehearingentity = new Casehearing(); // from database db entity table
                 // Zone_master  = new Zone_master_Model();
                 _casehearingentity = _DataContext.casehearing.Where(c => c.courtcaseid.Equals(case_hearing_model.courtcaseid)).FirstOrDefault();
-                _casehearingentity = _DataContext.casehearing.Where(c => Convert.ToDateTime(c.hearingdate).Equals(case_hearing_model.hearingdate)).FirstOrDefault();
+                _casehearingentity = _DataContext.casehearing.Where(c => c.hearingdate.Equals(case_hearing_model.hearingdate)).FirstOrDefault();
 
                 if (_casehearingentity.courtcaseid == case_hearing_model.courtcaseid && _casehearingentity.hearingdate == case_hearing_model.hearingdate)
                 {

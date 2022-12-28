@@ -6,41 +6,31 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IGRSCourtAPI.Database.DB_Entity
-
 {
-    [Table("writappealsmaster")]
-    public class Writappeals_master
+    [Table("pendingenquiry")]
+    public class Pendingenquiry
     {
-
-        public Writappeals_master()
-        {
+        //public Pendingenquiry()
+        //{
             // District_masters = new HashSet<District_master>();
             //Sro_masters = new HashSet<Sro_master>();
             //Zone_masters = new.HashSet<Zone_master>();
             // Courtcases = new HashSet<Courtcase>();
-        }
+            //.Writappealsmaster = new.HashSet<Writappealsmaster>();
+        //}
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int writappealsid { get; set; }
+
+        public int pendingenquiryid { get; set; }
         public int zoneid { get; set; }
         public int districtid { get; set; }
         public int sroid { get; set; }
         public int courtcaseid { get; set; }
-        public string regularnumber { get; set; }
-        public string hcreferenceno { get; set; }
-        public string natureofdisposal { get; set; }
-        public int writappealstatusid { get; set; }
+        public int writappealsid { get; set; }
+        public string subject { get; set; }
+        public string referenceno { get; set; }
         public string remarks { get; set; }
         public DateTime? createddate { get; set; }
         public bool flag { get; set; }
-
-        //public virtual ICollection<District_master> District_masters { get; set; }
-
-        //public virtual ICollection<Sro_master> Sro_masters { get; set; }
-
-        //public virtual ICollection<Zone_master> Zone_masters { get; set; }
-
-        //public virtual ICollection<Courtcase> Courtcases { get; set; }
-
     }
 }

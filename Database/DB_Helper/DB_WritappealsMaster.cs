@@ -24,22 +24,6 @@ namespace IGRSCourtAPI.Database.DB_Helper
         {
             try
             {
-                //var dataList = _DataContext.Writappeals_Masters.OrderBy(a => a.writappeals).ToList();
-                //dataList.ForEach(row => response.Add(new Writappeals_master_Model()
-                //{
-                //    writappealsid = row.writappealsid,
-                //    zoneid = row.zoneid,
-                //    districtid = row.districtid,
-                //    sroid = row.sroid,
-                //    courtcaseid = row.courtcaseid,
-                //    regularnumber = row.regularnumber,
-                //    natureofdisposal = row.natureofdisposal,
-                //    remarks = row.remarks,
-                //    createddate = row.createddate,
-                //    flag = row.flag
-                //}));
-
-
                 var _caseModel = (from _dbCaseEntity in _DataContext.Courtcases
                                   join Zone in _DataContext.Zone_Masters on _dbCaseEntity.zoneid equals Zone.zoneid
                                   join District in _DataContext.District_Masters on _dbCaseEntity.districtid equals District.districtid
@@ -47,9 +31,10 @@ namespace IGRSCourtAPI.Database.DB_Helper
                                   join CaseType in _DataContext.Casetype_Masters on _dbCaseEntity.casetypeid equals CaseType.casetypeid
                                   join Court in _DataContext.Court_Masters on _dbCaseEntity.courtid equals Court.courtid
                                   join CaseStatus in _DataContext.Casestatus_Masters on _dbCaseEntity.casestatusid equals CaseStatus.casestatusid
-                                  join Writappeals in _DataContext.Writappeals_Masters on _dbCaseEntity.courtcaseid equals Writappeals.courtcaseid into writ
-                                        from _write in writ.DefaultIfEmpty()
+                                  join Writappeals in _DataContext.Writappeals_Masters on _dbCaseEntity.courtcaseid equals Writappeals.courtcaseid
+                                        into writ from _write in writ.DefaultIfEmpty()
                                   join WritAppealsStatus in _DataContext.Writappealstatus_Masters on _write.writappealstatusid equals WritAppealsStatus.writappealstatusid
+                                        into writappeal from _writeappeal in writappeal.DefaultIfEmpty() 
                                   where _dbCaseEntity.zoneid == zoneid && _dbCaseEntity.districtid == districtid
                                   && _dbCaseEntity.sroid == sroid && _dbCaseEntity.casetypeid == casetypeid 
                                   select new Writappeals_master_Model
@@ -79,9 +64,11 @@ namespace IGRSCourtAPI.Database.DB_Helper
                                       casestatusname = CaseStatus.casestatusname,
                                       casetypename = CaseType.casetypename,
                                       courtname = Court.courtname,
+                                      natureofdisposal = _write.natureofdisposal,
+                                      hcreferenceno = _write.hcreferenceno,
                                       regularnumber = _write.regularnumber,
                                       writappealstatusid = _write.writappealstatusid > 0 ? _write.writappealstatusid : 0,
-                                      writappealstatusname = WritAppealsStatus.writappealstatusname,
+                                      writappealstatusname = _writeappeal.writappealstatusname,
                                       remarks = _write.remarks
 
                                   }).ToList();
@@ -140,6 +127,8 @@ namespace IGRSCourtAPI.Database.DB_Helper
             _writappealsMaster.sroid = writappeals_Master.sroid;
             _writappealsMaster.courtcaseid = writappeals_Master.courtcaseid;
             _writappealsMaster.regularnumber = writappeals_Master.regularnumber;
+            _writappealsMaster.hcreferenceno = writappeals_Master.hcreferenceno;
+            _writappealsMaster.natureofdisposal = writappeals_Master.natureofdisposal;
             _writappealsMaster.writappealstatusid = writappeals_Master.writappealstatusid;
             _writappealsMaster.createddate = writappeals_Master.createddate;
             _writappealsMaster.remarks = writappeals_Master.remarks;

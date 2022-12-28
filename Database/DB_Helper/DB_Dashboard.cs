@@ -1,4 +1,7 @@
-﻿using IGRSCourtAPI.Model;
+﻿using Azure;
+using IGRSCourtAPI.Common;
+using IGRSCourtAPI.Model;
+using Microsoft.EntityFrameworkCore.Internal;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,27 +18,24 @@ namespace IGRSCourtAPI.Database.DB_Helper
         public List<KeyValuePair<string, int>> GetCount()
         {
             List<KeyValuePair<string, int>> list = new List<KeyValuePair<string, int>>();
-            int gov_count = 0, igr_count = 0, others_count = 0;
-            var fromTable = _DataContext.Courtcases.ToList();
-            fromTable.ForEach(row =>
-            {
-                if (row.responsetypeid == 1 && !row.counterfiled)
-                {
-                    gov_count++;
-                }
-                else if (row.responsetypeid == 2)
-                {
-                    igr_count++;
-                }
-                else if (row.responsetypeid == 3)
-                {
-                    others_count++;
-                }
-            });
-            list.Add(new KeyValuePair<string, int>("GOVT Respondent", gov_count));
-            list.Add(new KeyValuePair<string, int>("IGR Respondent", igr_count));
-            list.Add(new KeyValuePair<string, int>("OTHERS Respondent", others_count));
-            list.Add(new KeyValuePair<string, int>("Pending with G.P for vetting", 0));
+            int writ_count = 0, pending_count = 0, supreme_count = 0, timebound_count = 0, law_count = 0;
+            var temp = (from a in _DataContext.Courtcases
+                         group a by a.responsetypeid into _courtcase
+                        select new
+                        {
+                            id = _courtcase.Key > 0 ? _courtcase.Key : 0,
+                            count = _courtcase.Key > 0 ? _courtcase.Count() : 0
+                        }).ToList();
+            writ_count = _DataContext.Writappeals_Masters.Count();
+            supreme_count = _DataContext.SupremeCourtCase.Count();
+            list.Add(new KeyValuePair<string, int>("GOV", temp.Where(a=>a.id ==1).FirstOrDefault() == null? 0 : temp.Where(a => a.id == 1).FirstOrDefault().count));
+            list.Add(new KeyValuePair<string, int>("IGR", temp.Where(a => a.id == 2).FirstOrDefault()== null ? 0 : temp.Where(a => a.id == 2).FirstOrDefault().count));
+            list.Add(new KeyValuePair<string, int>("OTHERS", temp.Where(a => a.id == 3).FirstOrDefault()==null ?0 : temp.Where(a => a.id == 3).FirstOrDefault().count));
+            list.Add(new KeyValuePair<string, int>("WRIT", writ_count));
+            list.Add(new KeyValuePair<string, int>("PENDING", pending_count));
+            list.Add(new KeyValuePair<string, int>("SUPREME", supreme_count));
+            list.Add(new KeyValuePair<string, int>("TIMEBOUND", timebound_count));
+            list.Add(new KeyValuePair<string, int>("LAW", law_count));
             return list;
         }
     }
