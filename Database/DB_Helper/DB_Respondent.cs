@@ -95,7 +95,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
 
         public List<Courtcase_Model> FilterCourtCases(int zoneid, int districtid, int sroid, List<Courtcase_Model> list)
         {
-            List <Courtcase_Model > filteredList = new List<Courtcase_Model>();
+            List <Courtcase_Model> filteredList = new List<Courtcase_Model>();
             if(zoneid == 0)
             {
                 filteredList = list;
