@@ -25,7 +25,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
             try
             {
 
-                var MenuList = _DataContext.Menumasters.Where(a => a.roleid == roleid).ToList();
+                var MenuList = _DataContext.Menumasters.Where(a => a.roleid == roleid && a.isactive == true).ToList();
 
                 MenuList.ForEach(row => Menu_Master_Model.Add(new Menu_Model()
                 {

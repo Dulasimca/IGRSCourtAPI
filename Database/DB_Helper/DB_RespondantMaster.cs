@@ -28,6 +28,9 @@ namespace IGRSCourtAPI.Database.DB_Helper
             {
                 respondentsid = row.respondentsid,
                 respondentsname = row.respondentsname,
+                mobno1 = row.mobno1,
+                mobno2 = row.mobno2,
+                mailid = row.mailid,
                 createddate = row.createddate,
                 flag = row.flag
             }));
@@ -44,6 +47,9 @@ namespace IGRSCourtAPI.Database.DB_Helper
             var dataList = _DataContext.respondentsmaster.Where(a => a.respondentsid == _respondentsmaster).FirstOrDefault();
             response.respondentsid = dataList.respondentsid;
             response.respondentsname = dataList.respondentsname;
+            response.mobno1 = dataList.mobno1;
+            response.mobno2 = dataList.mobno2;
+            response.mailid = dataList.mailid;
             response.createddate = dataList.createddate;
             response.flag = dataList.flag;
             return response;
@@ -69,6 +75,9 @@ namespace IGRSCourtAPI.Database.DB_Helper
                     {
                         _respondentsmaster.respondentsid = respondentsmaster.respondentsid;
                         _respondentsmaster.respondentsname = respondentsmaster.respondentsname;
+                        _respondentsmaster.mobno1 = respondentsmaster.mobno1;
+                        _respondentsmaster.mobno2 = respondentsmaster.mobno2;
+                        _respondentsmaster.mailid = respondentsmaster.mailid;
                         _respondentsmaster.createddate = respondentsmaster.createddate;
                         _respondentsmaster.flag = respondentsmaster.flag;
                     }
@@ -78,6 +87,9 @@ namespace IGRSCourtAPI.Database.DB_Helper
                     //POST
                     _respondentsmaster.respondentsid = respondentsmaster.respondentsid;
                     _respondentsmaster.respondentsname = respondentsmaster.respondentsname;
+                    _respondentsmaster.mobno1 = respondentsmaster.mobno1;
+                    _respondentsmaster.mobno2 = respondentsmaster.mobno2;
+                    _respondentsmaster.mailid = respondentsmaster.mailid;
                     _respondentsmaster.createddate = respondentsmaster.createddate;
                     _respondentsmaster.flag = respondentsmaster.flag;
                     _DataContext.respondentsmaster.Add(_respondentsmaster);
