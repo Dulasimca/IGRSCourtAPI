@@ -110,6 +110,9 @@ namespace IGRSCourtAPI.Database.DB_Helper
                 {
                     respondentsid = row.respondentsid,
                     respondentsname = row.respondentsname,
+                    mobno1 = row.mobno1,
+                    mobno2 = row.mobno2,
+                    mailid = row.mailid,
                     createddate = row.createddate,
                     flag = row.flag,
                     responsetypeid=row.responsetypeid

@@ -28,5 +28,6 @@ namespace IGRSCourtAPI.Database.DB_Entity
         public DateTime createddate { get; set; }//, createddate timestamp
         public bool flag { get; set; } // , flag boolean
         public int responsetypeid { get; set; }
+
     }
 }

@@ -22,19 +22,20 @@ namespace IGRSCourtAPI.Database.DB_Helper
         /// <returns></returns>
         public List<Respondant_master_model> GetRespondentsMaster()
         {
-            List<Respondant_master_model> response = new List<Respondant_master_model>();
-            var dataList = _DataContext.respondentsmaster.OrderBy(e => e.respondentsname).ToList();
-            dataList.ForEach(row => response.Add(new Respondant_master_model()
-            {
-                respondentsid = row.respondentsid,
-                respondentsname = row.respondentsname,
-                mobno1 = row.mobno1,
-                mobno2 = row.mobno2,
-                mailid = row.mailid,
-                createddate = row.createddate,
-                flag = row.flag
-            }));
-            return response;
+            var respondentsmaster = (from _dbCaseEntity in _DataContext.respondentsmaster
+                                     join Response in _DataContext.Responsetype_Masters on _dbCaseEntity.responsetypeid equals Response.responsetypeid
+                                  select new Respondant_master_model
+                                  {
+                                      respondentsid = _dbCaseEntity.respondentsid,
+                                         respondentsname = _dbCaseEntity.respondentsname,
+                                         mobno1 = _dbCaseEntity.mobno1,
+                                         mobno2 = _dbCaseEntity.mobno2,
+                                         mailid = _dbCaseEntity.mailid,
+                                         createddate = _dbCaseEntity.createddate,
+                                         flag = _dbCaseEntity.flag,
+                                         responsetypename = Response.responsetypename
+                                    }).ToList();
+            return respondentsmaster;
         }
 
         /// <summary>
@@ -78,6 +79,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
                         _respondentsmaster.mobno1 = respondentsmaster.mobno1;
                         _respondentsmaster.mobno2 = respondentsmaster.mobno2;
                         _respondentsmaster.mailid = respondentsmaster.mailid;
+                        _respondentsmaster.responsetypeid = respondentsmaster.responsetypeid;
                         _respondentsmaster.createddate = respondentsmaster.createddate;
                         _respondentsmaster.flag = respondentsmaster.flag;
                     }
@@ -90,6 +92,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
                     _respondentsmaster.mobno1 = respondentsmaster.mobno1;
                     _respondentsmaster.mobno2 = respondentsmaster.mobno2;
                     _respondentsmaster.mailid = respondentsmaster.mailid;
+                    _respondentsmaster.responsetypeid = respondentsmaster.responsetypeid;
                     _respondentsmaster.createddate = respondentsmaster.createddate;
                     _respondentsmaster.flag = respondentsmaster.flag;
                     _DataContext.respondentsmaster.Add(_respondentsmaster);
