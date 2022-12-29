@@ -43,7 +43,7 @@ namespace IGRSCourtAPI.Database
         public DbSet<Timebound> Timebound { get; set; }
         public DbSet<Pendingenquiry> Pendingenquiry { get; set; }
 
-
+        public DbSet<CounterfiledMaster> CounterfiledMasters { get; set; }
 
     }
 }
