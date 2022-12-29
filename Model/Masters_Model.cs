@@ -18,7 +18,9 @@ namespace IGRSCourtAPI.Model
         public List<Responsetype_master_Model> responsetype_Masters { get; set; }
         public List<Slp_master_model> slpmaster { get; set; }
         public List<Judgement_master_model> judgementmaster { get; set; }
+        public List<Menu_Model> menumaster { get; set; }
         public List<Writappealstatus_master_Model> Writappealstatus_Masters { get; internal set; }
+        public List<Counterfiled_master_Model> counterfiledmaster { get; set; }
 
     }
 }

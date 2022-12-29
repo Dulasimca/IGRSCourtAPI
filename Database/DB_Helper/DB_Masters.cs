@@ -31,9 +31,10 @@ namespace IGRSCourtAPI.Database.DB_Helper
             List<Respondant_master_model> respondant_Master_Models = new List<Respondant_master_model>();
             List<Responsetype_master_Model> responsetype_Master_Models = new List<Responsetype_master_Model>();
             List<Slp_master_model> slp_Master_Models = new List<Slp_master_model>();
-            //List<Judgement_master_model> judgement_Master_Models = new List<Judgement_master_model>();
+            List<Judgement_master_model> judgement_Master_Models = new List<Judgement_master_model>();
            // List<Menu_Model> menu_Models = new List<Menu_Model>();
             List<Writappealstatus_master_Model> writappealstatus_Master_Model = new List<Writappealstatus_master_Model>();
+            List<Counterfiled_master_Model> counterfiled_Master_Models = new List<Counterfiled_master_Model>();
 
             try
             {
@@ -48,9 +49,10 @@ namespace IGRSCourtAPI.Database.DB_Helper
                 var RespondentMasterList = _DataContext.respondentsmaster.ToList();
                 var ResponsetypeList = _DataContext.Responsetype_Masters.ToList(); 
                  var SlpMasterList = _DataContext.slpmaster.ToList();
-                //var JudgementMasterList = _DataContext.judgementmaster.ToList();
+                var JudgementMasterList = _DataContext.judgementmaster.ToList();
                // var MenuMasterList = _DataContext.Menumasters.ToList();
                 var WritappealstatusList = _DataContext.Writappealstatus_Masters.ToList();
+                var counterFiledList = _DataContext.counterfiledmaster.ToList();
 
                 ZoneList.ForEach(row => zone_Master_Model.Add(new Zone_master_Model()
                 {
@@ -109,7 +111,8 @@ namespace IGRSCourtAPI.Database.DB_Helper
                     respondentsid = row.respondentsid,
                     respondentsname = row.respondentsname,
                     createddate = row.createddate,
-                    flag = row.flag
+                    flag = row.flag,
+                    responsetypeid=row.responsetypeid
                 }));
 
                 ResponsetypeList.ForEach(row => responsetype_Master_Models.Add(new Responsetype_master_Model()
@@ -135,13 +138,21 @@ namespace IGRSCourtAPI.Database.DB_Helper
                     flag = row.flag
                 }));
 
-                //JudgementMasterList.ForEach(row => judgement_Master_Models.Add(new Judgement_master_model()
-                //{
-                //    judgementid = row.judgementid,
-                //    judgementname = row.judgementname,
-                //    createddate = row.createddate,
-                //    flag = row.flag
-                //}));
+                JudgementMasterList.ForEach(row => judgement_Master_Models.Add(new Judgement_master_model()
+                {
+                    judgementid = row.judgementid,
+                    judgementname = row.judgementname,
+                    createddate = row.createddate,
+                    flag = row.flag
+                }));
+
+                counterFiledList.ForEach(row => counterfiled_Master_Models.Add(new Counterfiled_master_Model()
+                {
+                    counterfiledid = row.counterfiledid,
+                    counterfiledname = row.counterfiledname,
+                    createddate = row.createddate,
+                    flag = row.flag
+                }));
 
                 //MenuMasterList.ForEach(row => menu_Models.Add(new Menu_Model()
                 //{
@@ -170,7 +181,8 @@ namespace IGRSCourtAPI.Database.DB_Helper
                     rolemaster = Role_master_models,
                     respondentsmaster = respondant_Master_Models,
                     slpmaster = slp_Master_Models,
-                    //judgementmaster = judgement_Master_Models,
+                    judgementmaster = judgement_Master_Models,
+                    counterfiledmaster = counterfiled_Master_Models,
                     Writappealstatus_Masters = writappealstatus_Master_Model,
                     responsetype_Masters= responsetype_Master_Models
 

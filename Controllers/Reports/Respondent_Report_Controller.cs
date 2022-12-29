@@ -20,11 +20,11 @@ namespace IGRSCourtAPI.Controllers.Reports
 
         [HttpGet]
         [Route("api/[controller]/GetRespondentReport")]
-        public IActionResult Get(int respondentType, int zoneid, int sroid, int districtid, string fromdate, string todate)
+        public IActionResult Get(int userid, int respondentType, int zoneid, int districtid, int sroid, string fromdate, string todate)
         {
             try
             {
-                List<Courtcase_Model> _data = _db.GetCourtcase(respondentType, zoneid, sroid, districtid, fromdate, todate);
+                List<Courtcase_Model> _data = _db.GetCourtcase(userid, respondentType, zoneid, districtid, sroid, fromdate, todate);
                 if (_data == null)
                 {
                     return Ok(ResponseType.NotFound);
@@ -33,7 +33,7 @@ namespace IGRSCourtAPI.Controllers.Reports
             }
             catch (Exception ex)
             {
-                AuditLog.WriteError("SaveRespondentReport : " + ex.Message);
+                AuditLog.WriteError("SaveRespondentCase : " + ex.Message);
                 return BadRequest(ResponseType.Failure);
             }
         }

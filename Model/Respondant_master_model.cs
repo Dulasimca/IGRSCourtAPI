@@ -14,5 +14,6 @@ namespace IGRSCourtAPI.Model
         public string mailid { get; set; }//, mobno2 varchar(200)
         public DateTime createddate { get; set; }//, createddate timestamp
         public bool flag { get; set; } // , flag boolean
+        public int responsetypeid { get; set; }
     }
 }

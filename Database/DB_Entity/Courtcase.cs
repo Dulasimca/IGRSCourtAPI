@@ -20,13 +20,13 @@ namespace IGRSCourtAPI.Database.DB_Entity
         public string casenumber { get; set; }// casenumber varchar(100)
         public int caseyear { get; set; }// caseyear int
         public int courtid { get; set; } // courtid int  
+        public string mainrespondentsid { get; set; }
         public string petitionername { get; set; } //petitionername varchar(200)
         public string mainrespondents { get; set; } //, mainrespondents varchar(3000)
         public string mainprayer { get; set; }//, mainprayer varchar(2000)
-        public bool counterfiled { get; set; } //, counterfiled boolean
+        public int counterfiledid { get; set; }
         public int casestatusid { get; set; }//, casestatusid       int 
-        //public int judgementid { get; set; }//, judgementid..int
-        public bool judgementvalue { get; set; }
+        public int judgementid { get; set; }//, judgementid..int
         public string remarks { get; set; } // , remarks varchar(1000)
         public int responsetypeid { get; set; } //    , responsetypeid int
         public DateTime casedate { get; set; } //, casedate date

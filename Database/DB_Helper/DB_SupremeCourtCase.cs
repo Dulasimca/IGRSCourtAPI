@@ -15,7 +15,8 @@ namespace IGRSCourtAPI.Database.DB_Helper
             _DataContext = dataContext;
         }
 
-        public List<SupremeCourtCaseModel> GetCourtCases(int _courtcaseid)
+        public List<SupremeCourtCaseModel> GetCourtCases(int _userid, string _fromdate, string _todate,
+            int _zoneid, int _sroid, int _districtid)
         {
             var _caseList = (from _dbSupremeCourtEntity in _DataContext.SupremeCourtCase
                                       join Zone in _DataContext.Zone_Masters on _dbSupremeCourtEntity.zoneid equals Zone.zoneid
@@ -23,8 +24,9 @@ namespace IGRSCourtAPI.Database.DB_Helper
                                       join Sro in _DataContext.Sro_Masters on _dbSupremeCourtEntity.sroid equals Sro.sroid
                                       join Slp in _DataContext.slpmaster on _dbSupremeCourtEntity.slptypeid equals Slp.slpid
                                       join CaseStatus in _DataContext.Casestatus_Masters on _dbSupremeCourtEntity.casestatusid equals CaseStatus.casestatusid
-                                      where _dbSupremeCourtEntity.courtcaseid == _courtcaseid
-                                      select new SupremeCourtCaseModel
+                                      where _dbSupremeCourtEntity.casedate >= Convert.ToDateTime(_fromdate)
+                             && _dbSupremeCourtEntity.casedate <= Convert.ToDateTime(_todate) && _dbSupremeCourtEntity.userid == _userid 
+                             select new SupremeCourtCaseModel
                                       {
                                           courtcaseid = _dbSupremeCourtEntity.courtcaseid,
                                           zoneid = _dbSupremeCourtEntity.zoneid,
@@ -50,7 +52,33 @@ namespace IGRSCourtAPI.Database.DB_Helper
                                           casestatusname = CaseStatus.casestatusname,
                                           slptypename = Slp.name,
                                       }).ToList();
-            return _caseList;
+            return FilterCourtCases(_zoneid, _districtid, _sroid, _caseList);
+        }
+
+        public List<SupremeCourtCaseModel> FilterCourtCases(int zoneid, int districtid, int sroid, List<SupremeCourtCaseModel> list)
+        {
+            List<SupremeCourtCaseModel> filteredList = new List<SupremeCourtCaseModel>();
+            if (zoneid == 0)
+            {
+                filteredList = list;
+            }
+            else if (zoneid > 0 && districtid == 0)
+            {
+                filteredList = list.Where(a => a.zoneid == zoneid).ToList();
+            }
+            else if (zoneid > 0 && districtid > 0 && sroid == 0)
+            {
+                filteredList = list.Where(a => a.zoneid == zoneid && a.districtid == districtid).ToList();
+            }
+            else if (zoneid > 0 && districtid > 0 && sroid > 0)
+            {
+                filteredList = list.Where(a => a.zoneid == zoneid && a.districtid == districtid && a.sroid == sroid).ToList();
+            }
+            else
+            {
+                filteredList = list;
+            }
+            return filteredList;
         }
 
         public bool SaveSupremeCourtCase(SupremeCourtCaseModel _caseModel)
