@@ -21,11 +21,11 @@ namespace IGRSCourtAPI.Controllers
         //POST
         [HttpGet]
         [Route("api/[controller]/GetSupremeCourtCase")]
-        public IActionResult Get(int courtcaseid)
+        public IActionResult Get(int userid, string fromdate, string todate, int zoneid, int sroid, int districtid)
         {
             try
             {
-                List<SupremeCourtCaseModel> _data = _db.GetCourtCases(courtcaseid);
+                List<SupremeCourtCaseModel> _data = _db.GetCourtCases(userid, fromdate, todate, zoneid, sroid, districtid);
                 if (_data == null)
                 {
                     return Ok(ResponseType.NotFound);
@@ -46,7 +46,7 @@ namespace IGRSCourtAPI.Controllers
             try
             {
                 bool isSuccess = _db.SaveSupremeCourtCase(model);
-                return Ok(isSuccess == true ? model : ResponseType.Failure);
+                return Ok(isSuccess == true ? isSuccess : ResponseType.Failure);
             }
             catch (Exception ex)
             {

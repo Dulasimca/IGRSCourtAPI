@@ -17,10 +17,11 @@ namespace IGRSCourtAPI.Model
         public string petitionername { get; set; } //petitionername varchar(200)
         public string mainrespondents { get; set; } //, mainrespondents varchar(3000)
         public string mainprayer { get; set; }//, mainprayer varchar(2000)
-        public bool counterfiled { get; set; } //, counterfiled boolean
+        public int counterfiledid { get; set; }
         public int casestatusid { get; set; }//, casestatusid       int 
         public string remarks { get; set; } // , remarks varchar(1000)
         public int responsetypeid { get; set; } //    , responsetypeid int
+        public string mainrespondentsid { get; set; }
         public DateTime casedate { get; set; } //, casedate date
         public DateTime? createdate { get; set; } //createdate     timestamp
         public bool flag { get; set; } // ,flag boolean
@@ -31,8 +32,11 @@ namespace IGRSCourtAPI.Model
         public string casetypename { get; set; }
         public string courtname { get; set; }
         public string casestatusname { get; set; }
-        //public int judgementid { get; set; }
-        public bool judgementvalue { get; set; }
+        public string responsetypename { get; set; }
+        public int judgementid { get; set; }
+        public string judgementname { get; set; }
+        public string counterfiledname { get; set; }
+        // public string respondentsname { get; set; }
 
     }
 }

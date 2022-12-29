@@ -24,22 +24,6 @@ namespace IGRSCourtAPI.Database.DB_Helper
         {
             try
             {
-                //var dataList = _DataContext.Writappeals_Masters.OrderBy(a => a.writappeals).ToList();
-                //dataList.ForEach(row => response.Add(new Writappeals_master_Model()
-                //{
-                //    writappealsid = row.writappealsid,
-                //    zoneid = row.zoneid,
-                //    districtid = row.districtid,
-                //    sroid = row.sroid,
-                //    courtcaseid = row.courtcaseid,
-                //    regularnumber = row.regularnumber,
-                //    natureofdisposal = row.natureofdisposal,
-                //    remarks = row.remarks,
-                //    createddate = row.createddate,
-                //    flag = row.flag
-                //}));
-
-
                 var _caseModel = (from _dbCaseEntity in _DataContext.Courtcases
                                   join Zone in _DataContext.Zone_Masters on _dbCaseEntity.zoneid equals Zone.zoneid
                                   join District in _DataContext.District_Masters on _dbCaseEntity.districtid equals District.districtid

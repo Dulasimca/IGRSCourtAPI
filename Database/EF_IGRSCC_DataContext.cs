@@ -40,10 +40,10 @@ namespace IGRSCourtAPI.Database
         public DbSet<ChangePassword> changepassword { get; set; }
         public DbSet<Writappealstatus_master> Writappealstatus_Masters { get; set; }
         public DbSet<SupremeCourtCase> SupremeCourtCase { get; set; }
+        public DbSet<Casehearing> casehearing { get; set; }
         public DbSet<Timebound> Timebound { get; set; }
         public DbSet<Pendingenquiry> Pendingenquiry { get; set; }
-
-        public DbSet<CounterfiledMaster> CounterfiledMasters { get; set; }
+        public DbSet<Counterfiled_master> counterfiledmaster { get; set; }
 
     }
 }
