@@ -45,6 +45,5 @@ namespace IGRSCourtAPI.Database
         public DbSet<Pendingenquiry> Pendingenquiry { get; set; }
         public DbSet<Counterfiled_master> counterfiledmaster { get; set; }
 
-
     }
 }
