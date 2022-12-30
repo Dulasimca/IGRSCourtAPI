@@ -33,6 +33,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
                                          mailid = _dbCaseEntity.mailid,
                                          createddate = _dbCaseEntity.createddate,
                                          flag = _dbCaseEntity.flag,
+                                         responsetypeid = _dbCaseEntity.responsetypeid,
                                          responsetypename = Response.responsetypename
                                     }).ToList();
             return respondentsmaster;
