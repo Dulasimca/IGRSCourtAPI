@@ -16,7 +16,7 @@ namespace IGRSCourtAPI.Database.DB_Helper.Reports
             _DataContext = dataContext;
         }
 
-        public List<Courtcase_Model> GetCourtcase(int userid, int _respondentType, int _zoneid, int _districtid, int _sroid, string _fromdate, string _todate)
+        public List<Courtcase_Model> GetCourtcase(int userid, int _respondentType, int _zoneid, int _districtid, int _sroid, int _fromyear, int _toyear)
         {
             try
             {
@@ -31,8 +31,8 @@ namespace IGRSCourtAPI.Database.DB_Helper.Reports
                                   join Judgement in _DataContext.judgementmaster on _dbCaseEntity.judgementid equals Judgement.judgementid
                                   join Respondenttype in _DataContext.Responsetype_Masters on _dbCaseEntity.responsetypeid equals Respondenttype.responsetypeid
                                   join CaseStatus in _DataContext.Casestatus_Masters on _dbCaseEntity.casestatusid equals CaseStatus.casestatusid
-                                  where _dbCaseEntity.casedate >= Convert.ToDateTime(_fromdate)
-                                  && _dbCaseEntity.casedate <= Convert.ToDateTime(_todate)
+                                  where _dbCaseEntity.caseyear >= _fromyear
+                                  && _dbCaseEntity.caseyear <= _toyear
                                   // && _dbCaseEntity.zoneid == _zoneid && _dbCaseEntity.districtid == _districtid && _dbCaseEntity.sroid == _sroid
                                   select new Courtcase_Model
                                   {
