@@ -45,7 +45,7 @@ namespace IGRSCourtAPI.Controllers
         {
             try
             {
-                List<String> _data = _db.GetCaseNoList(courttype, caseyear, casetype);
+                List<string> _data = _db.GetCaseNoList(courttype, caseyear, casetype);
 
                 if (_data == null)
                 {
