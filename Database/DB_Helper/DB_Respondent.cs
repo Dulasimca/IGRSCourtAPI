@@ -112,6 +112,87 @@ namespace IGRSCourtAPI.Database.DB_Helper
             //.Where(x => x.courtcaseid == _caseid).FirstOrDefault();//from db
         }
 
+        public List<string> GetCaseNoList(int _courttype, int _caseyear, int _casetype)
+        {
+            try
+            {
+                var _list = _DataContext.Courtcases.Where(x => x.caseyear >= _caseyear && x.caseyear <= _caseyear
+                                  && x.casetypeid == _casetype && x.courtid == _courttype                                 
+                             ).Select(p => p.casenumber).ToList();
+                return _list;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+                return null;
+            }
+        }
+
+        public List<Courtcase_Model> GetCourtCaseByCaseNo(int _courttype, int _caseyear, string _caseno)
+        {
+            try
+            {
+                var _caseModel = (from _dbCaseEntity in _DataContext.Courtcases
+                                  join Zone in _DataContext.Zone_Masters on _dbCaseEntity.zoneid equals Zone.zoneid
+                                  join District in _DataContext.District_Masters on _dbCaseEntity.districtid equals District.districtid
+                                  join Sro in _DataContext.Sro_Masters on _dbCaseEntity.sroid equals Sro.sroid
+                                  join CaseType in _DataContext.Casetype_Masters on _dbCaseEntity.casetypeid equals CaseType.casetypeid
+                                  join Court in _DataContext.Court_Masters on _dbCaseEntity.courtid equals Court.courtid
+                                  join Counterfiled in _DataContext.counterfiledmaster on _dbCaseEntity.counterfiledid equals Counterfiled.counterfiledid
+                                  join Judgement in _DataContext.judgementmaster on _dbCaseEntity.judgementid equals Judgement.judgementid
+                                  join Respondenttype in _DataContext.Responsetype_Masters on _dbCaseEntity.responsetypeid equals Respondenttype.responsetypeid
+                                  join CaseStatus in _DataContext.Casestatus_Masters on _dbCaseEntity.casestatusid equals CaseStatus.casestatusid
+                                  where _dbCaseEntity.caseyear >= _caseyear && _dbCaseEntity.caseyear <= _caseyear 
+                                  && _dbCaseEntity.casenumber == _caseno && _dbCaseEntity.courtid == _courttype
+                                  select new Courtcase_Model
+                                  {
+                                      courtcaseid = _dbCaseEntity.courtcaseid,
+                                      zoneid = _dbCaseEntity.zoneid,
+                                      districtid = _dbCaseEntity.districtid,
+                                      sroid = _dbCaseEntity.sroid,
+                                      remarks = _dbCaseEntity.remarks,
+                                      petitionername = _dbCaseEntity.petitionername,
+                                      mainrespondents = _dbCaseEntity.mainrespondents,
+                                      casedate = _dbCaseEntity.casedate,
+                                      casenumber = _dbCaseEntity.casenumber,
+                                      casestatusid = _dbCaseEntity.casestatusid,
+                                      casetypeid = _dbCaseEntity.casetypeid,
+                                      caseyear = _dbCaseEntity.caseyear,
+                                      counterfiledid = _dbCaseEntity.counterfiledid,
+                                      judgementid = _dbCaseEntity.judgementid,
+                                      mainprayer = _dbCaseEntity.mainprayer,
+                                      createdate = _dbCaseEntity.createdate,
+                                      courtid = _dbCaseEntity.courtid,
+                                      flag = _dbCaseEntity.flag,
+                                      userid = _dbCaseEntity.userid,
+                                      mainrespondentsid = _dbCaseEntity.mainrespondentsid,
+                                      zonename = Zone.zonename,
+                                      districtname = District.districtname,
+                                      sroname = Sro.sroname,
+                                      casestatusname = CaseStatus.casestatusname,
+                                      casetypename = CaseType.casetypename,
+                                      courtname = Court.courtname,
+                                      responsetypeid = Respondenttype.responsetypeid,
+                                      responsetypename = Respondenttype.responsetypename,
+                                      counterfiledname = Counterfiled.counterfiledname,
+                                      judgementname = Judgement.judgementname
+
+                                  }).ToList();
+                return _caseModel;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+                return null;
+            }
+
+            //.Where(x => x.courtcaseid == _caseid).FirstOrDefault();//from db
+        }
+
         public List<Courtcase_Model> FilterCourtCases(int zoneid, int districtid, int sroid, List<Courtcase_Model> list)
         {
             List <Courtcase_Model> filteredList = new List<Courtcase_Model>();
@@ -183,11 +264,9 @@ namespace IGRSCourtAPI.Database.DB_Helper
             dbEntity.mainprayer = _caseModel.mainprayer;
             dbEntity.mainrespondents = _caseModel.mainrespondents;
             dbEntity.courtid = _caseModel.courtid;
-            dbEntity.casedate = _caseModel.casedate;
             dbEntity.casenumber = _caseModel.casenumber;
             dbEntity.casestatusid = _caseModel.casestatusid;
             dbEntity.casetypeid = _caseModel.casetypeid;
-            dbEntity.judgementid = _caseModel.judgementid;
             dbEntity.caseyear = _caseModel.caseyear;
             dbEntity.counterfiledid = _caseModel.counterfiledid;
             dbEntity.flag = _caseModel.flag;

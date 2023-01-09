@@ -39,6 +39,48 @@ namespace IGRSCourtAPI.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("api/[controller]/GetCaseNoList")]
+        public IActionResult Get(int courttype, int caseyear, int casetype)
+        {
+            try
+            {
+                List<String> _data = _db.GetCaseNoList(courttype, caseyear, casetype);
+
+                if (_data == null)
+                {
+                    return Ok(ResponseType.NotFound);
+                }
+                return Ok(_data);
+            }
+            catch (Exception ex)
+            {
+                AuditLog.WriteError("GetCaseNoList : " + ex.Message);
+                return BadRequest(ResponseType.Failure);
+            }
+        }
+
+        [HttpGet]
+        [Route("api/[controller]/GetCourtCase")]
+        public IActionResult Get(int courttype, int caseyear, string caseno)
+        {
+            try
+            {
+                List<Courtcase_Model> _data = _db.GetCourtCaseByCaseNo(courttype, caseyear, caseno);
+
+                if (_data == null)
+                {
+                    return Ok(ResponseType.NotFound);
+                }
+                return Ok(_data);
+            }
+            catch (Exception ex)
+            {
+                AuditLog.WriteError("GetCourtCaseByCaseNo : " + ex.Message);
+                return BadRequest(ResponseType.Failure);
+            }
+        }
+
         [HttpPost]
         [Route("api/[controller]/SaveRespondentCase")]
         public IActionResult Post([FromBody] Courtcase_Model model)
