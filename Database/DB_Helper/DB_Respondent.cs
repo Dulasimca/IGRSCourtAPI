@@ -149,7 +149,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
                                      // remarks = _dbCaseEntity.remarks,
                                       petitionername = _dbCaseEntity.petitionername,
                                       mainrespondents = _dbCaseEntity.mainrespondents,
-                                      casedate = _dbCaseEntity.casedate,
+                                    //  casedate = _dbCaseEntity.casedate,
                                       casenumber = _dbCaseEntity.casenumber,
                                       casestatusid = _dbCaseEntity.casestatusid,
                                       casetypeid = _dbCaseEntity.casetypeid,

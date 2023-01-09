@@ -28,7 +28,7 @@ namespace IGRSCourtAPI.Database.DB_Entity
         public int casestatusid { get; set; }//, casestatusid       int 
         public int responsetypeid { get; set; } //    , responsetypeid int
         public int mainprayerid { get; set; } //    , mainprayerid int
-        public DateTime casedate { get; set; } //, casedate date
+      //  public DateTime casedate { get; set; } //, casedate date
         public DateTime? createdate { get; set; } //createdate     timestamp
         public bool flag { get; set; } // ,flag boolean
         public int userid { get; set; } // ,flag boolean

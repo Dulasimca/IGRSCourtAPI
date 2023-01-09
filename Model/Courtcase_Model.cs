@@ -22,7 +22,7 @@ namespace IGRSCourtAPI.Model
         public int responsetypeid { get; set; } //    , responsetypeid int
         public string mainrespondentsid { get; set; }
         public int mainprayerid { get; set; } //    , mainprayerid int
-        public DateTime casedate { get; set; } //, casedate date
+       // public DateTime casedate { get; set; } //, casedate date
         public DateTime? createdate { get; set; } //createdate     timestamp
         public bool flag { get; set; } // ,flag boolean
         public int userid { get; set; }
@@ -33,8 +33,8 @@ namespace IGRSCourtAPI.Model
         public string courtname { get; set; }
         public string casestatusname { get; set; }
         public string responsetypename { get; set; }
-        public int judgementid { get; set; }
-        public string judgementname { get; set; }
+       // public int judgementid { get; set; }
+       // public string judgementname { get; set; }
         public string counterfiledname { get; set; }
         public string mainprayername { get; set; }
         // public string respondentsname { get; set; }
