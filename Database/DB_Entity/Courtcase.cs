@@ -26,11 +26,11 @@ namespace IGRSCourtAPI.Database.DB_Entity
         public string mainprayer { get; set; }//, mainprayer varchar(2000)
         public int counterfiledid { get; set; }
         public int casestatusid { get; set; }//, casestatusid       int 
-        public int judgementid { get; set; }//, judgementid..int
-        public string remarks { get; set; } // , remarks varchar(1000)
+       // public int judgementid { get; set; }//, judgementid..int
+        //public string remarks { get; set; } // , remarks varchar(1000)
         public int responsetypeid { get; set; } //    , responsetypeid int
         public int mainprayerid { get; set; } //    , mainprayerid int
-        public DateTime casedate { get; set; } //, casedate date
+        //public DateTime casedate { get; set; } //, casedate date
         public DateTime? createdate { get; set; } //createdate     timestamp
         public bool flag { get; set; } // ,flag boolean
         public int userid { get; set; } // ,flag boolean
