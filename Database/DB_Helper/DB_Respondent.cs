@@ -146,7 +146,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
                                       zoneid = _dbCaseEntity.zoneid,
                                       districtid = _dbCaseEntity.districtid,
                                       sroid = _dbCaseEntity.sroid,
-                                      remarks = _dbCaseEntity.remarks,
+                                     // remarks = _dbCaseEntity.remarks,
                                       petitionername = _dbCaseEntity.petitionername,
                                       mainrespondents = _dbCaseEntity.mainrespondents,
                                       casedate = _dbCaseEntity.casedate,
@@ -155,7 +155,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
                                       casetypeid = _dbCaseEntity.casetypeid,
                                       caseyear = _dbCaseEntity.caseyear,
                                       counterfiledid = _dbCaseEntity.counterfiledid,
-                                      judgementid = _dbCaseEntity.judgementid,
+                                     // judgementid = _dbCaseEntity.judgementid,
                                       gistofcase = _dbCaseEntity.mainprayer,
                                       createdate = _dbCaseEntity.createdate,
                                       courtid = _dbCaseEntity.courtid,
@@ -172,7 +172,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
                                       responsetypename = Respondenttype.responsetypename,
                                       counterfiledname = Counterfiled.counterfiledname,
                                       mainprayername = MainPrayer.mainprayerdesc,
-                                      judgementname = Judgement.judgementname
+                                      //judgementname = Judgement.judgementname
 
                                   }).ToList();
                 return _caseModel;
@@ -258,7 +258,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
             dbEntity.sroid = _caseModel.sroid;  
             dbEntity.casetypeid = _caseModel.casetypeid;
             dbEntity.petitionername = _caseModel.petitionername;
-            dbEntity.remarks = _caseModel.remarks;
+           // dbEntity.remarks = _caseModel.remarks;
             dbEntity.responsetypeid = _caseModel.responsetypeid;
             dbEntity.mainrespondentsid = _caseModel.mainrespondentsid;
             dbEntity.mainprayer = _caseModel.gistofcase;
