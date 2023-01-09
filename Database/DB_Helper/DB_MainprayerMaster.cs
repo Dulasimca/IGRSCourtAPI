@@ -17,7 +17,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
         public List<Mainprayer_master_Model> GetMainprayerMaster()
         {
             List<Mainprayer_master_Model> response = new List<Mainprayer_master_Model>();
-            var dataList = _DataContext.mainprayermaster.OrderBy(e => e.mainprayerid).ToList();
+            var dataList = _DataContext.Mainprayer_Master.OrderBy(e => e.mainprayerid).ToList();
             dataList.ForEach(row => response.Add(new Mainprayer_master_Model()
             {
                 mainprayerid = row.mainprayerid,
@@ -35,7 +35,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
         public Mainprayer_master_Model GetMainprayerMaster(int _mainprayerid)
         {
             Mainprayer_master_Model response = new Mainprayer_master_Model();
-            var dataList = _DataContext.mainprayermaster.Where(a => a.mainprayerid == _mainprayerid).FirstOrDefault();
+            var dataList = _DataContext.Mainprayer_Master.Where(a => a.mainprayerid == _mainprayerid).FirstOrDefault();
             response.mainprayerid = dataList.mainprayerid;
             response.mainprayerdesc = dataList.mainprayerdesc;
             response.createddate = dataList.createddate;
@@ -58,7 +58,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
                 if (mainprayermaster.mainprayerid > 0)
                 {
                     //PUT
-                    _mainprayermaster = _DataContext.mainprayermaster.Where(d => d.mainprayerid.Equals(mainprayermaster.mainprayerid)).FirstOrDefault();
+                    _mainprayermaster = _DataContext.Mainprayer_Master.Where(d => d.mainprayerid.Equals(mainprayermaster.mainprayerid)).FirstOrDefault();
                     if (_mainprayermaster != null)
                     {
                         _mainprayermaster.mainprayerid = mainprayermaster.mainprayerid;
@@ -74,7 +74,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
                     _mainprayermaster.mainprayerdesc = mainprayermaster.mainprayerdesc;
                     _mainprayermaster.createddate = mainprayermaster.createddate;
                     _mainprayermaster.flag = mainprayermaster.flag;
-                    _DataContext.mainprayermaster.Add(_mainprayermaster);
+                    _DataContext.Mainprayer_Master.Add(_mainprayermaster);
                 }
                 _DataContext.SaveChanges();
                 isSuccess = true;

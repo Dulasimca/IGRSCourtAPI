@@ -29,6 +29,7 @@ namespace IGRSCourtAPI.Database.DB_Entity
         public int judgementid { get; set; }//, judgementid..int
         public string remarks { get; set; } // , remarks varchar(1000)
         public int responsetypeid { get; set; } //    , responsetypeid int
+        public int mainprayerid { get; set; } //    , mainprayerid int
         public DateTime casedate { get; set; } //, casedate date
         public DateTime? createdate { get; set; } //createdate     timestamp
         public bool flag { get; set; } // ,flag boolean
