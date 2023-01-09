@@ -50,7 +50,7 @@ namespace IGRSCourtAPI.Database.DB_Helper.Reports
                                       caseyear = _dbCaseEntity.caseyear,
                                       counterfiledid = _dbCaseEntity.counterfiledid,
                                       judgementid = _dbCaseEntity.judgementid,
-                                      mainprayer = _dbCaseEntity.mainprayer,
+                                      gistofcase = _dbCaseEntity.mainprayer,
                                       createdate = _dbCaseEntity.createdate,
                                       courtid = _dbCaseEntity.courtid,
                                       mainrespondentsid = _dbCaseEntity.mainrespondentsid,
