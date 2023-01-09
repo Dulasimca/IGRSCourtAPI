@@ -28,11 +28,9 @@ namespace IGRSCourtAPI.Database.DB_Helper
                 zoneid = row.zoneid,
                 districtid = row.districtid,
                 sroid = row.sroid,
-                remarks = row.remarks,
                 responsetypeid = row.responsetypeid,
                 petitionername = row.petitionername,
                 mainrespondents = row.mainrespondents,
-                casedate = row.casedate,
                 casenumber = row.casenumber,
                 casestatusid = row.casestatusid,
                 casetypeid = row.casetypeid,
@@ -40,7 +38,6 @@ namespace IGRSCourtAPI.Database.DB_Helper
                 counterfiledid = row.counterfiledid,
                 gistofcase = row.mainprayer,
                 createdate = row.createdate,
-                judgementid = row.judgementid,
                 courtid = row.courtid,
                 flag = row.flag
             }));
@@ -59,7 +56,6 @@ namespace IGRSCourtAPI.Database.DB_Helper
                                   join CaseType in _DataContext.Casetype_Masters on _dbCaseEntity.casetypeid equals CaseType.casetypeid
                                   join Court in _DataContext.Court_Masters on _dbCaseEntity.courtid equals Court.courtid
                                   join Counterfiled in _DataContext.counterfiledmaster on _dbCaseEntity.counterfiledid equals Counterfiled.counterfiledid
-                                  join Judgement in _DataContext.judgementmaster on _dbCaseEntity.judgementid equals Judgement.judgementid
                                   join Respondenttype in _DataContext.Responsetype_Masters on _dbCaseEntity.responsetypeid equals Respondenttype.responsetypeid
                                   join CaseStatus in _DataContext.Casestatus_Masters on _dbCaseEntity.casestatusid equals CaseStatus.casestatusid
                                   join MainPrayer in _DataContext.Mainprayer_Master on _dbCaseEntity.mainprayerid equals MainPrayer.mainprayerid
@@ -72,16 +68,13 @@ namespace IGRSCourtAPI.Database.DB_Helper
                                       zoneid = _dbCaseEntity.zoneid,
                                       districtid = _dbCaseEntity.districtid,
                                       sroid = _dbCaseEntity.sroid,
-                                      remarks = _dbCaseEntity.remarks,
                                       petitionername = _dbCaseEntity.petitionername,
                                       mainrespondents = _dbCaseEntity.mainrespondents,
-                                      casedate = _dbCaseEntity.casedate,
                                       casenumber = _dbCaseEntity.casenumber,
                                       casestatusid = _dbCaseEntity.casestatusid,
                                       casetypeid = _dbCaseEntity.casetypeid,
                                       caseyear = _dbCaseEntity.caseyear,
                                       counterfiledid = _dbCaseEntity.counterfiledid,
-                                      judgementid = _dbCaseEntity.judgementid,
                                       gistofcase = _dbCaseEntity.mainprayer,
                                       createdate = _dbCaseEntity.createdate,
                                       courtid = _dbCaseEntity.courtid,
@@ -98,7 +91,6 @@ namespace IGRSCourtAPI.Database.DB_Helper
                                       responsetypename = Respondenttype.responsetypename,
                                       counterfiledname = Counterfiled.counterfiledname,
                                       mainprayername = MainPrayer.mainprayerdesc,
-                                      judgementname = Judgement.judgementname
 
                                   }).ToList();
                 return FilterCourtCases(_zoneid, _districtid, _sroid, _caseModel);
@@ -119,8 +111,8 @@ namespace IGRSCourtAPI.Database.DB_Helper
             try
             {
                 var _list = _DataContext.Courtcases.Where(x => x.caseyear >= _caseyear && x.caseyear <= _caseyear
-                                  && x.casetypeid == _casetype && x.courtid == _courttype                                 
-                             ).Select(p => p.casenumber).ToList();
+                                  && x.casetypeid == _casetype && x.courtid == _courttype
+                             ).Select(p =>  p.casenumber).ToList();
                 return _list;
 
             }
@@ -143,7 +135,6 @@ namespace IGRSCourtAPI.Database.DB_Helper
                                   join CaseType in _DataContext.Casetype_Masters on _dbCaseEntity.casetypeid equals CaseType.casetypeid
                                   join Court in _DataContext.Court_Masters on _dbCaseEntity.courtid equals Court.courtid
                                   join Counterfiled in _DataContext.counterfiledmaster on _dbCaseEntity.counterfiledid equals Counterfiled.counterfiledid
-                                  join Judgement in _DataContext.judgementmaster on _dbCaseEntity.judgementid equals Judgement.judgementid
                                   join Respondenttype in _DataContext.Responsetype_Masters on _dbCaseEntity.responsetypeid equals Respondenttype.responsetypeid
                                   join CaseStatus in _DataContext.Casestatus_Masters on _dbCaseEntity.casestatusid equals CaseStatus.casestatusid
                                   join MainPrayer in _DataContext.Mainprayer_Master on _dbCaseEntity.mainprayerid equals MainPrayer.mainprayerid
@@ -155,16 +146,13 @@ namespace IGRSCourtAPI.Database.DB_Helper
                                       zoneid = _dbCaseEntity.zoneid,
                                       districtid = _dbCaseEntity.districtid,
                                       sroid = _dbCaseEntity.sroid,
-                                      remarks = _dbCaseEntity.remarks,
                                       petitionername = _dbCaseEntity.petitionername,
                                       mainrespondents = _dbCaseEntity.mainrespondents,
-                                      casedate = _dbCaseEntity.casedate,
                                       casenumber = _dbCaseEntity.casenumber,
                                       casestatusid = _dbCaseEntity.casestatusid,
                                       casetypeid = _dbCaseEntity.casetypeid,
                                       caseyear = _dbCaseEntity.caseyear,
                                       counterfiledid = _dbCaseEntity.counterfiledid,
-                                      judgementid = _dbCaseEntity.judgementid,
                                       gistofcase = _dbCaseEntity.mainprayer,
                                       createdate = _dbCaseEntity.createdate,
                                       courtid = _dbCaseEntity.courtid,
@@ -181,7 +169,6 @@ namespace IGRSCourtAPI.Database.DB_Helper
                                       responsetypename = Respondenttype.responsetypename,
                                       counterfiledname = Counterfiled.counterfiledname,
                                       mainprayername = MainPrayer.mainprayerdesc,
-                                      judgementname = Judgement.judgementname
 
                                   }).ToList();
                 return _caseModel;
@@ -258,22 +245,21 @@ namespace IGRSCourtAPI.Database.DB_Helper
         }
         private Courtcase ManageCourtcase(Courtcase_Model _caseModel, Courtcase dbEntity)
         {
+            dbEntity.courtid = _caseModel.courtid;
+            dbEntity.casenumber = _caseModel.casenumber;
+            dbEntity.caseyear = _caseModel.caseyear; 
+            dbEntity.responsetypeid = _caseModel.responsetypeid;
             dbEntity.zoneid = _caseModel.zoneid;
             dbEntity.districtid = _caseModel.districtid;
             dbEntity.sroid = _caseModel.sroid;  
-            dbEntity.petitionername = _caseModel.petitionername;
-            dbEntity.remarks = _caseModel.remarks;
-            dbEntity.responsetypeid = _caseModel.responsetypeid;
-            dbEntity.mainrespondentsid = _caseModel.mainrespondentsid;
-            dbEntity.mainprayer = _caseModel.gistofcase;
-            dbEntity.mainrespondents = _caseModel.mainrespondents;
-            dbEntity.courtid = _caseModel.courtid;
-            dbEntity.casenumber = _caseModel.casenumber;
-            dbEntity.casestatusid = _caseModel.casestatusid;
             dbEntity.casetypeid = _caseModel.casetypeid;
-            dbEntity.caseyear = _caseModel.caseyear;
+            dbEntity.petitionername = _caseModel.petitionername;
+            dbEntity.mainrespondents = _caseModel.mainrespondents;
+            dbEntity.mainprayer = _caseModel.gistofcase;
             dbEntity.counterfiledid = _caseModel.counterfiledid;
+            dbEntity.casestatusid = _caseModel.casestatusid;
             dbEntity.mainprayerid = _caseModel.mainprayerid;
+            dbEntity.mainrespondentsid = _caseModel.mainrespondentsid;
             dbEntity.flag = _caseModel.flag;
             dbEntity.createdate = _caseModel.createdate;
             dbEntity.userid = _caseModel.userid;
