@@ -1,6 +1,7 @@
 ﻿using IGRSCourtAPI.Database.DB_Entity;
 using IGRSCourtAPI.Model;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,29 +46,24 @@ namespace IGRSCourtAPI.Database.DB_Helper
                 throw;
             }
         }
-        public bool SaveLinkedCase(LinkedCase_Model model)
+        public bool SaveLinkedCase(List<LinkedCase_Model> model, int Courtcaseid)
         {
             bool result = false;
             try
             {
-                LinkedCase _dbLinkedCaseEntity = new LinkedCase();
-
-                if (model.courtcaseid > 0)
+                foreach (var item in model)
                 {
-                    //PUT
-                    _dbLinkedCaseEntity = _DataContext.LinkedCases.Where(x => x.caseid == model.caseid).FirstOrDefault();
-                    if (_dbLinkedCaseEntity != null)
-                    {
-                        _dbLinkedCaseEntity = ManageLinkedcase(model, _dbLinkedCaseEntity);
-                    }
-                }
-                else
-                {
-                    //POST
-                    _dbLinkedCaseEntity = ManageLinkedcase(model, _dbLinkedCaseEntity);
+                    LinkedCase _dbLinkedCaseEntity = new LinkedCase();
+                    _dbLinkedCaseEntity = ManageLinkedcase(item, _dbLinkedCaseEntity, Courtcaseid);
                     _DataContext.LinkedCases.Add(_dbLinkedCaseEntity);
+                    if (item.caseid > 0)
+                    {
+                        //PUT
+                        _DataContext.Entry(_dbLinkedCaseEntity).State = EntityState.Modified;
+                    }
+                    _DataContext.SaveChanges();
                 }
-                _DataContext.SaveChanges();
+                
                 result = true;
             }
             catch (Exception ex)
@@ -78,9 +74,9 @@ namespace IGRSCourtAPI.Database.DB_Helper
             return result;
         }
 
-        private LinkedCase ManageLinkedcase(LinkedCase_Model _caseModel, LinkedCase dbEntity)
+        private LinkedCase ManageLinkedcase(LinkedCase_Model _caseModel, LinkedCase dbEntity,int Courtcaseid)
         {
-            dbEntity.courtcaseid = _caseModel.courtcaseid;
+            dbEntity.courtcaseid = Courtcaseid;
             dbEntity.courtid = _caseModel.courtid;
             dbEntity.caseno = _caseModel.caseno;
             dbEntity.caseyear = _caseModel.caseyear;

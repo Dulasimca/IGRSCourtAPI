@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Security.Policy;
+using Microsoft.EntityFrameworkCore;
 
 namespace IGRSCourtAPI.Database.DB_Helper
 {
@@ -218,32 +219,23 @@ namespace IGRSCourtAPI.Database.DB_Helper
 
         public bool saveCourtCases(Courtcase_Model _caseModel)
         {
+            DB_LinkedCase dB_LinkedCase = new DB_LinkedCase(_DataContext);
             int courtcaseid = 0;
             bool result = false;
             try
             {
                 Courtcase _dbCaseEntity = new Courtcase();
-
-                if(_caseModel.courtcaseid > 0)
+                _dbCaseEntity = ManageCourtcase(_caseModel, _dbCaseEntity);
+                _DataContext.Courtcases.Add(_dbCaseEntity);
+                if (_caseModel.courtcaseid > 0)
                 {
-                    courtcaseid = _caseModel.courtcaseid;
-                    //PUT
-                    _dbCaseEntity = _DataContext.Courtcases.Where(x => x.courtcaseid == _caseModel.courtcaseid).FirstOrDefault();
-                   Console.WriteLine(_dbCaseEntity);
-                    if (_dbCaseEntity != null)
-                    {
-                        _dbCaseEntity = ManageCourtcase(_caseModel, _dbCaseEntity);
-                     //   _DataContext.Courtcases.Update(_dbCaseEntity);
-                    }
-                } else
-                {
-                    //POST
-                    _dbCaseEntity = ManageCourtcase(_caseModel, _dbCaseEntity);
-                    _DataContext.Courtcases.Add(_dbCaseEntity);
-                }
-
+                    _DataContext.Entry(_dbCaseEntity).State = EntityState.Modified;
+                }  
                 _DataContext.SaveChanges();
                 courtcaseid = _dbCaseEntity.courtcaseid;
+                //insert data to Linked court case
+                dB_LinkedCase.SaveLinkedCase(_caseModel.linkedCase, courtcaseid);
+
                 result = true;
             } 
             catch(Exception ex)
