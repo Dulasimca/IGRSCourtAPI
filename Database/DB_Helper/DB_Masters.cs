@@ -35,6 +35,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
            // List<Menu_Model> menu_Models = new List<Menu_Model>();
             List<Writappealstatus_master_Model> writappealstatus_Master_Model = new List<Writappealstatus_master_Model>();
             List<Counterfiled_master_Model> counterfiled_Master_Models = new List<Counterfiled_master_Model>();
+            List<Mainprayer_master_Model> mainprayer_Master_Model = new List<Mainprayer_master_Model>();
 
             try
             {
@@ -53,6 +54,8 @@ namespace IGRSCourtAPI.Database.DB_Helper
                // var MenuMasterList = _DataContext.Menumasters.ToList();
                 var WritappealstatusList = _DataContext.Writappealstatus_Masters.ToList();
                 var counterFiledList = _DataContext.counterfiledmaster.ToList();
+                var mainprayerList = _DataContext.Mainprayer_Master.ToList();
+
 
                 ZoneList.ForEach(row => zone_Master_Model.Add(new Zone_master_Model()
                 {
@@ -157,6 +160,14 @@ namespace IGRSCourtAPI.Database.DB_Helper
                     flag = row.flag
                 }));
 
+                mainprayerList.ForEach(row => mainprayer_Master_Model.Add(new Mainprayer_master_Model()
+                    {
+                        mainprayerid = row.mainprayerid,
+                        mainprayerdesc = row.mainprayerdesc,
+                        createddate = row.createddate,
+                        flag = row.flag
+                }));
+
                 //MenuMasterList.ForEach(row => menu_Models.Add(new Menu_Model()
                 //{
                 //    menuid = row.menuid,
@@ -187,7 +198,8 @@ namespace IGRSCourtAPI.Database.DB_Helper
                     judgementmaster = judgement_Master_Models,
                     counterfiledmaster = counterfiled_Master_Models,
                     Writappealstatus_Masters = writappealstatus_Master_Model,
-                    responsetype_Masters= responsetype_Master_Models
+                    responsetype_Masters= responsetype_Master_Models,
+                    MainPrayerMaster = mainprayer_Master_Model
 
                 };
                 return masters_Model;

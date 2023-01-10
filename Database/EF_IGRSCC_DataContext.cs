@@ -44,6 +44,8 @@ namespace IGRSCourtAPI.Database
         public DbSet<Timebound> Timebound { get; set; }
         public DbSet<Pendingenquiry> Pendingenquiry { get; set; }
         public DbSet<Counterfiled_master> counterfiledmaster { get; set; }
+        public DbSet<Mainprayer_master> Mainprayer_Master { get; set; }
+        public DbSet<LinkedCase> LinkedCases { get; set; }
 
     }
 }
