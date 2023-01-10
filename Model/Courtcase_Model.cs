@@ -38,6 +38,6 @@ namespace IGRSCourtAPI.Model
         public string counterfiledname { get; set; }
         public string mainprayername { get; set; }
         // public string respondentsname { get; set; }
-        public List<LinkedCase_Model> linkedCase
+        public List<LinkedCase_Model> linkedCaseList { get; set; }
     }
 }

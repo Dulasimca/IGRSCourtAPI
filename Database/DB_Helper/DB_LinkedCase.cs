@@ -74,7 +74,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
             return result;
         }
 
-        private LinkedCase ManageLinkedcase(LinkedCase_Model _caseModel, LinkedCase dbEntity,int Courtcaseid)
+        private LinkedCase ManageLinkedcase(LinkedCase_Model _caseModel, LinkedCase dbEntity, int Courtcaseid)
         {
             dbEntity.courtcaseid = Courtcaseid;
             dbEntity.courtid = _caseModel.courtid;

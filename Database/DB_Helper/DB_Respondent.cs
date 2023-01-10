@@ -232,9 +232,12 @@ namespace IGRSCourtAPI.Database.DB_Helper
                     _DataContext.Entry(_dbCaseEntity).State = EntityState.Modified;
                 }  
                 _DataContext.SaveChanges();
-                courtcaseid = _dbCaseEntity.courtcaseid;
-                //insert data to Linked court case
-                dB_LinkedCase.SaveLinkedCase(_caseModel.linkedCase, courtcaseid);
+                if (_caseModel.linkedCaseList.Count > 0)
+                {
+                    courtcaseid = _dbCaseEntity.courtcaseid;
+                    //insert data to Linked court case
+                    dB_LinkedCase.SaveLinkedCase(_caseModel.linkedCaseList, courtcaseid);
+                }
 
                 result = true;
             } 

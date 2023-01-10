@@ -11,7 +11,6 @@ using System.Linq;
 
 namespace IGRSCourtAPI.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     public class LinkedCaseController : ControllerBase
     {

@@ -88,7 +88,7 @@ namespace IGRSCourtAPI.Controllers
             try
             {
                 bool isSuccess = _db.saveCourtCases(model);
-                return Ok(isSuccess == true ? model : ResponseType.Failure);
+                return Ok(isSuccess == true ? isSuccess : ResponseType.Failure);
             }
             catch (Exception ex)
             {
