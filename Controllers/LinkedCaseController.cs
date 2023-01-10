@@ -22,21 +22,6 @@ namespace IGRSCourtAPI.Controllers
             _db = new DB_LinkedCase(dataContext);
         }
 
-        [HttpPost]
-        [Route("api/[controller]/SaveLinkedCase")]
-        public IActionResult Post([FromBody] LinkedCase_Model model)
-        {
-            try
-            {
-                bool isSuccess = _db.SaveLinkedCase(model);
-                return Ok(isSuccess == true ? model : ResponseType.Failure);
-            }
-            catch (Exception ex)
-            {
-                AuditLog.WriteError("SaveRespondentCase : " + ex.Message);
-                return BadRequest(ResponseType.Failure);
-            }
-        }
 
         [HttpGet]
         [Route("api/[controller]/GetLinkedCase")]
