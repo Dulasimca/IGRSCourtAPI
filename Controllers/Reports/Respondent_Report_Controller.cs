@@ -20,11 +20,11 @@ namespace IGRSCourtAPI.Controllers.Reports
 
         [HttpGet]
         [Route("api/[controller]/GetRespondentReport")]
-        public IActionResult Get(int userid, int respondentType, int zoneid, int districtid, int sroid, string fromdate, string todate)
+        public IActionResult Get(int userid, int respondentType, int zoneid, int districtid, int sroid, int fromyear, int toyear)
         {
             try
             {
-                List<Courtcase_Model> _data = _db.GetCourtcase(userid, respondentType, zoneid, districtid, sroid, fromdate, todate);
+                List<Courtcase_Model> _data = _db.GetCourtcase(userid, respondentType, zoneid, districtid, sroid, fromyear, toyear);
                 if (_data == null)
                 {
                     return Ok(ResponseType.NotFound);

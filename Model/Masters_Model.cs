@@ -21,6 +21,8 @@ namespace IGRSCourtAPI.Model
         public List<Menu_Model> menumaster { get; set; }
         public List<Writappealstatus_master_Model> Writappealstatus_Masters { get; internal set; }
         public List<Counterfiled_master_Model> counterfiledmaster { get; set; }
+        public List<Mainprayer_master_Model> MainPrayerMaster { get; set; }
+
 
     }
 }
