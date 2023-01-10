@@ -169,7 +169,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
                 {
                     //POST
                     // _menumaster.menuid = menumaster.menuid;
-                    _menumaster.id = _DataContext.Menumasters.Max(m => m.id) + 1;// menumaster.id;// maxid ??
+                    _menumaster.id = (_DataContext.Menumasters.Max(m => (int?)m.id) ?? 0) + 1;// menumaster.id;// maxid ??
                     _menumaster.name = menumaster.name;
                     _menumaster.url = menumaster.url;
                     _menumaster.parentid = menumaster.parentid;
