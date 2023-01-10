@@ -140,6 +140,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
 
         public bool saveCourtCases(Courtcase_Model _caseModel)
         {
+            int courtcaseid = 0;
             bool result = false;
             try
             {
@@ -147,6 +148,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
 
                 if(_caseModel.courtcaseid > 0)
                 {
+                    courtcaseid = _caseModel.courtcaseid;
                     //PUT
                     _dbCaseEntity = _DataContext.Courtcases.Where(x => x.courtcaseid == _caseModel.courtcaseid).FirstOrDefault();
                    Console.WriteLine(_dbCaseEntity);
@@ -161,7 +163,9 @@ namespace IGRSCourtAPI.Database.DB_Helper
                     _dbCaseEntity = ManageCourtcase(_caseModel, _dbCaseEntity);
                     _DataContext.Courtcases.Add(_dbCaseEntity);
                 }
+
                 _DataContext.SaveChanges();
+                courtcaseid = _dbCaseEntity.courtcaseid;
                 result = true;
             } 
             catch(Exception ex)
