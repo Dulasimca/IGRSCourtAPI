@@ -78,6 +78,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
                                       gistofcase = _dbCaseEntity.mainprayer,
                                       createdate = _dbCaseEntity.createdate,
                                       courtid = _dbCaseEntity.courtid,
+                                      mainprayerid = _dbCaseEntity.mainprayerid,
                                       flag = _dbCaseEntity.flag,
                                       userid = _dbCaseEntity.userid,
                                       mainrespondentsid = _dbCaseEntity.mainrespondentsid,
@@ -159,6 +160,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
                                       gistofcase = _dbCaseEntity.mainprayer,
                                       createdate = _dbCaseEntity.createdate,
                                       courtid = _dbCaseEntity.courtid,
+                                      mainprayerid = _dbCaseEntity.mainprayerid,
                                       flag = _dbCaseEntity.flag,
                                       userid = _dbCaseEntity.userid,
                                       mainrespondentsid = _dbCaseEntity.mainrespondentsid,
@@ -265,7 +267,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
             dbEntity.counterfiledid = _caseModel.counterfiledid;
             dbEntity.casestatusid = _caseModel.casestatusid;
             dbEntity.mainprayerid = _caseModel.mainprayerid;
-            dbEntity.mainrespondentsid = _caseModel.mainrespondentsid;
+            dbEntity.mainrespondents = _caseModel.mainrespondents;
             dbEntity.flag = _caseModel.flag;
             dbEntity.createdate = _caseModel.createdate;
             dbEntity.userid = _caseModel.userid;
