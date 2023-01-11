@@ -250,6 +250,7 @@ namespace IGRSCourtAPI.Database.DB_Helper
         }
         private Courtcase ManageCourtcase(Courtcase_Model _caseModel, Courtcase dbEntity)
         {
+            dbEntity.courtcaseid = _caseModel.courtcaseid;
             dbEntity.courtid = _caseModel.courtid;
             dbEntity.casenumber = _caseModel.casenumber;
             dbEntity.caseyear = _caseModel.caseyear; 
